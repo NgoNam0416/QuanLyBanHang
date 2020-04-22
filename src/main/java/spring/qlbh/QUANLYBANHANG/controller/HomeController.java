@@ -22,16 +22,12 @@ import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
-import spring.qlbh.QUANLYBANHANG.dao.UserDAO;
+
 import spring.qlbh.QUANLYBANHANG.model.DonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.DongDonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.GioHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.HangInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
-import spring.qlbh.QUANLYBANHANG.model.UserInfo;
-
-
-
 
 
 @Controller
@@ -40,8 +36,7 @@ public class HomeController {
 	private HangDAO hangDAO;
 	@Autowired
 	private LoaiHangDAO loaiHangDAO;
-	@Autowired
-	private UserDAO userDAO;
+
 	@Autowired
 	private DonHangDAO donHangDAO;
 	@Autowired
