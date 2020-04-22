@@ -11,7 +11,7 @@ public class HangInfo {
 	private int maLoai;
 	private float soLuong;
 	private String donVi;
-	private String NoiSX;
+	private String noiSX;
 	private String tTThem;
 	private int trangThai;
 	private CommonsMultipartFile anh;
@@ -39,7 +39,7 @@ public class HangInfo {
 		this.maLoai = maLoai;
 		this.soLuong = soLuong;
 		this.donVi = donVi;
-		NoiSX = noiSX;
+		this.noiSX = noiSX;
 		this.tTThem = tTThem;
 		this.trangThai = trangThai;
 	}
@@ -109,11 +109,11 @@ public class HangInfo {
 	}
 
 	public String getNoiSX() {
-		return NoiSX;
+		return noiSX;
 	}
 
 	public void setNoiSX(String noiSX) {
-		NoiSX = noiSX;
+		noiSX = noiSX;
 	}
 
 	public String gettTThem() {
