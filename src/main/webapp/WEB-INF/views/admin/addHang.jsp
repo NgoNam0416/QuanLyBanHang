@@ -22,7 +22,7 @@
 								<div class="form-group">
 									<label>Tên Hàng</label>
 
-									<form:input path="tenHang" class="form-control"
+									<form:input path="tenHang" type="text" class="form-control"
 										placeholder="Nhập tên hàng" id="tenHang" />
 
 								</div>
@@ -38,9 +38,9 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>VAT</label>
-									<form:input path="vAT" type="number" min="0"   class="form-control"
-										placeholder="Nhập VAT" id="vAT" />
+									<label>Ngày Nhập Hàng</label>
+									<form:input path="ngayNhapHang" type="date"  class="form-control"
+										id="ngayNhapHang" />
 								</div>
 							</div>
 
@@ -59,17 +59,17 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Nhà Sản Xuất</label>
-									<form:input path="nhaSX" class="form-control"
-										placeholder="Nhập tên nhà sản xuất" id="nhaSX" />
+									<label>Nơi Sản Xuất</label>
+									<form:input path="NoiSX" type="text" class="form-control"
+										placeholder="Nhập tên nhà sản xuất" id="NoiSX" />
 
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Ngày Sản Xuất</label>
-									<form:input path="ngaySX" class="form-control"
-										placeholder="mm-dd-yyyy" id="ngaySX" />
+									<label>Đơn Vị</label>
+									<form:input path="donVi" type="text" class="form-control"
+										placeholder="Nhập đơn vị tính" id="donVi" />
 
 								</div>
 							</div>
@@ -78,15 +78,15 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Số Lượng</label>
-									<form:input path="soLuongHang" type="number" min="1"  class="form-control"
-										placeholder="Nhập số lượng" id="soLuongHang" />
+									<form:input path="soLuong" type="number" min="1"  class="form-control"
+										placeholder="Nhập số lượng" id="soLuong" />
 
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Trạng Thái</label>
-									<form:select path="trangThaiHang" class="form-control custom-select">
+									<form:select path="trangThai" class="form-control custom-select">
 										<form:option value="0" label="Đã bán" />
 										<form:option value="1" label="Chưa bán" />
 									</form:select>
@@ -99,20 +99,12 @@
 									<label>Thông Tin Thêm</label>
 									
 									<form:textarea path="tTThem" id="tTThem" class="form-control" style="height: 150px;"
-											placeholder="Nhập giới thiệu về hàng"/>
-									
+											placeholder="Nhập giới thiệu về hàng"></form:textarea>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Thời Gian BH</label>
-									<form:input path="tGBaoHanh" class="form-control"
-										placeholder="Nhập thời gian bảo hàng" id="tGBaoHanh" />
-
-								</div>
-							</div>
+							
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Thêm Ảnh Hàng</label>

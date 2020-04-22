@@ -24,7 +24,6 @@ public class HomeControllerAdmin {
 
 	@Autowired
 	private HangDAO hangDAO;
-
 	
 	@RequestMapping("/hang")
 	public String Hang(Model model) {

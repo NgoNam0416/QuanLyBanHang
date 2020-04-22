@@ -18,8 +18,8 @@ public class LoaiHangDAOImpl implements LoaiHangDAO {
 	public List<LoaiHangInfo> loadMenu() {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + LoaiHangInfo.class.getName()
-					+" ( lh.maLoai, lh.tenLoai) " // các trường trong đối tượng LoaiHangInfo
-					+" from " + LoaiHang.class.getName() + " lh "; // select bàng Hibernate thì nó trả về 1 đối tượng
+					+" ( lh.maLoai, lh.tenLoai,lh.maKM) " // cÃ¡c trÆ°á»�ng trong Ä‘á»‘i tÆ°á»£ng LoaiHangInfo
+					+" from " + LoaiHang.class.getName() + " lh "; // select bÃ ng Hibernate thÃ¬ nÃ³ tráº£ vá»� 1 Ä‘á»‘i tÆ°á»£ng
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
