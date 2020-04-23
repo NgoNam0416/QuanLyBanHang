@@ -31,17 +31,13 @@
 					<th></th>
 				</tr>
 			</thead>
-			
+			<p></p>
 			<tbody>
-				<c:forEach items="" var="h">
+				<c:forEach items="${loadLoaiHang}" var="h"> 
 					<tr>
-						<td></td>
-						<td><img style="max-width: 50px; height: 50px"
-							src=""
-							alt=""></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${h.maLoai}</td>
+						<td>${h.tenLoai}</td>
+						<td>${h.maKM}</td>
 						<td><a href="">
 								<button data-toggle="tooltip"
 									style="border: 2px solid lightgrey; border-radius: 5px;"

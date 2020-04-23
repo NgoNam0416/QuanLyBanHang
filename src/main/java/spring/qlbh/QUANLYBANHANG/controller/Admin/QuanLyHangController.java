@@ -78,7 +78,7 @@ public class QuanLyHangController {
 		String donVi= suaHangInfo.getDonVi();
 		String noiSX = suaHangInfo.getNoiSX();
 		String tTThem = suaHangInfo.gettTThem();
-		int trangThai = suaHangInfo.getTrangThai();
+		String trangThai = suaHangInfo.getTrangThai();
 		
 		CommonsMultipartFile fileDatas = suaHangInfo.getAnh();
 
@@ -130,7 +130,7 @@ public class QuanLyHangController {
 		String donVi= hangInfo.getDonVi();
 		String noiSX = hangInfo.getNoiSX();
 		String tTThem = hangInfo.gettTThem();
-		int trangThai = hangInfo.getTrangThai();
+		String trangThai = hangInfo.getTrangThai();
 
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
 
