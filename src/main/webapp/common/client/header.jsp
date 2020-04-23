@@ -8,11 +8,10 @@
 	<div id="top-header">
 		<div class="container">
 			<ul class="header-links pull-left">
-				<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+				<li><a href="#"><i class="fa fa-phone"></i> +0979789999</a></li>
 				<li><a href="#"><i class="fa fa-envelope-o"></i>
-						email@email.com</a></li>
-				<li><a href="#"><i class="fa fa-map-marker"></i> 1734
-						Stonecoal Road</a></li>
+						ngodinhnam0416@email.com</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i> Ngô Mây-Quy Nhơn</a></li>
 			</ul>
 			<ul class="header-links pull-right">
 				<c:if test="${checkUser == null }">
@@ -20,7 +19,7 @@
 						<div class="dropdown">
 							<a class="dropdown-toggle" id="login" data-toggle="dropdown"
 								aria-expanded="true"> <i class="fa fa-user-o"
-								visibility="hidden"></i>Login
+								visibility="hidden"></i>Đăng Nhập
 
 							</a>
 							<div class="cart-dropdown"style="width: 300px; max-height: 190px;overflow-y: visible;margin-bottom: 5px;>
@@ -72,7 +71,7 @@
 	<!-- /TOP HEADER -->
 
 	<!-- MAIN HEADER -->
-	<div id="header">
+	<div id="header" style="background-color:#56b80b;">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
@@ -93,7 +92,7 @@
 					<div class="header-search">
 						<form action="${pageContext.request.contextPath}/timkiem" method="get">
 							<input class="input" name="tukhoa" placeholder="Search here">
-							<button class="search-btn">Search</button>
+							<button class="search-btn">Tìm kiếm</button>
 						</form>
 					</div>
 				</div>
@@ -212,13 +211,11 @@
 		<div id="responsive-nav">
 			<!-- NAV -->
 			<ul class="main-nav nav navbar-nav">
-				<li class="active"><a href="${pageContext.request.contextPath}">Home</a></li>
-				<li><a href="#">Hot Deals</a></li>
-				<li><a href="#">Categories</a></li>
-				<li><a href="#">Laptops</a></li>
-				<li><a href="#">Smartphones</a></li>
-				<li><a href="#">Cameras</a></li>
-				<li><a href="#">Accessories</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}">Trang Chủ</a></li>
+				<li><a href="#">Sản Phẩm </a></li>
+				<li><a href="#">Giới Thiệu</a></li>
+				<li><a href="#">Liên Hệ</a></li>
+				
 			</ul>
 			<!-- /NAV -->
 		</div>
@@ -239,14 +236,14 @@
 				<div class="shop">
 					<div class="shop-img">
 						<img
-							src="${pageContext.request.contextPath}/template/client/img/shop01.png"
+							src="${pageContext.request.contextPath}/template/client/img/category-2.jpg"
 							alt="">
 					</div>
 					<div class="shop-body">
 						<h3>
-							Laptop<br>Collection
+							Trái Cây
 						</h3>
-						<a data-toggle="tab" href="#4" class="cta-btn">Shop now <i
+						<a data-toggle="tab" href="#2" class="cta-btn">Shop now <i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -258,12 +255,12 @@
 				<div class="shop">
 					<div class="shop-img">
 						<img
-							src="${pageContext.request.contextPath}/template/client/img/dt45.jpg"
+							src="${pageContext.request.contextPath}/template/client/img/category-2.jpg"
 							alt="">
 					</div>
 					<div class="shop-body">
 						<h3>
-							Điện thoại<br>Collection
+							Trái Cây
 						</h3>
 						<a data-toggle="tab" href="#3" class="cta-btn">Shop now <i
 							class="fa fa-arrow-circle-right"></i></a>
@@ -277,12 +274,12 @@
 				<div class="shop">
 					<div class="shop-img">
 						<img
-							src="${pageContext.request.contextPath}/template/client/img/tivi3.jpg"
+							src="${pageContext.request.contextPath}/template/client/img/category-3.jpg"
 							alt="">
 					</div>
 					<div class="shop-body">
 						<h3>
-							Tivi<br>Collection
+							Nước Ép
 						</h3>
 						<a data-toggle="tab" href="#1" class="cta-btn">Shop now <i
 							class="fa fa-arrow-circle-right"></i></a>

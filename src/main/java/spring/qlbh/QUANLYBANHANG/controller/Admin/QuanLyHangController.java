@@ -84,7 +84,6 @@ public class QuanLyHangController {
 
 		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
-
 		HangInfo suahang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 				soLuong, donVi, noiSX, tTThem, trangThai);
 		// call goi ham sua
@@ -137,7 +136,7 @@ public class QuanLyHangController {
 		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
 		if (hangDAO.loadHangTheoTen(tenHang) == null) {
-			HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, 1,
+			HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 					soLuong, donVi, noiSX, tTThem, trangThai);
 			// call goi ham insert
 			hangDAO.insertHang(hang);
