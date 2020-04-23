@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Hang {
 	private int maHang;
 	private String tenHang;
-	private String image;
+	private String imageLink;
 	private String ngayNhapHang;
 	private int donGia;
 	private int maLoai;
@@ -36,10 +36,10 @@ public class Hang {
 	}
 	@Column(name="Image")
 	public String getImage() {
-		return image;
+		return imageLink;
 	}
 	public void setImage(String imageLink) {
-		this.image = imageLink;
+		this.imageLink = imageLink;
 	}
 	@Column(name="NgayNhapHang")
 	public String getNgayNhapHang() {

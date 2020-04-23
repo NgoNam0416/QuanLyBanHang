@@ -66,19 +66,16 @@ public class HangDAOImpl implements HangDAO {
 	public void insertHang(HangInfo hangInfo) {
 		Session session = sessionfactory.getCurrentSession();
 		Hang hangentity = new Hang();
-//		hangentity.setMaHang(hangInfo.getMaHang());
-//		hangentity.setTenHang(hangInfo.getTenHang());
-//		hangentity.setDonGia(hangInfo.getDonGia());
-//		hangentity.setImageLink(hangInfo.getImageLink());
-//		hangentity.setvAT(hangInfo.getvAT());
-//		hangentity.setMaLoai(hangInfo.getMaLoai());
-//		hangentity.setNhaSX(hangInfo.getNhaSX());
-//		hangentity.setNgaySX(hangInfo.getNgaySX());
-//		hangentity.settGBaoHanh(hangInfo.gettGBaoHanh());
-//		hangentity.settTThem(hangInfo.gettTThem());
-//		hangentity.setSoLuongHang(hangInfo.getSoLuongHang());
-//		hangentity.setTrangThaiHang(hangInfo.getTrangThaiHang());
-
+		hangentity.setMaHang(hangInfo.getMaHang());
+		hangentity.setTenHang(hangInfo.getTenHang());
+		hangentity.setImage(hangInfo.getImageLink());
+		hangentity.setDonGia(hangInfo.getDonGia());
+		hangentity.setMaLoai(hangInfo.getMaLoai());
+		hangentity.setSoLuong(hangInfo.getSoLuong());
+		hangentity.setDonVi(hangInfo.getDonVi());
+		hangentity.setNoiSX(hangInfo.getNoiSX());	
+		hangentity.settTThem(hangInfo.gettTThem());	
+		hangentity.setTrangThai(hangInfo.getTrangThai());
 		session.persist(hangentity);
 
 	}
@@ -86,18 +83,16 @@ public class HangDAOImpl implements HangDAO {
 	public void uploadHang(HangInfo hangInfo) {
 		Session session = sessionfactory.getCurrentSession();
 		Hang hangentity = new Hang();
-//		hangentity.setMaHang(hangInfo.getMaHang());
-//		hangentity.setTenHang(hangInfo.getTenHang());
-//		hangentity.setDonGia(hangInfo.getDonGia());
-//		hangentity.setImageLink(hangInfo.getImageLink());
-//		hangentity.setvAT(hangInfo.getvAT());
-//		hangentity.setMaLoai(hangInfo.getMaLoai());
-//		hangentity.setNhaSX(hangInfo.getNhaSX());
-//		hangentity.setNgaySX(hangInfo.getNgaySX());
-//		hangentity.settGBaoHanh(hangInfo.gettGBaoHanh());
-//		hangentity.settTThem(hangInfo.gettTThem());
-//		hangentity.setSoLuongHang(hangInfo.getSoLuongHang());
-//		hangentity.setTrangThaiHang(hangInfo.getTrangThaiHang());
+		hangentity.setMaHang(hangInfo.getMaHang());
+		hangentity.setTenHang(hangInfo.getTenHang());
+		hangentity.setImage(hangInfo.getImageLink());
+		hangentity.setDonGia(hangInfo.getDonGia());
+		hangentity.setMaLoai(hangInfo.getMaLoai());
+		hangentity.setSoLuong(hangInfo.getSoLuong());
+		hangentity.setDonVi(hangInfo.getDonVi());
+		hangentity.setNoiSX(hangInfo.getNoiSX());	
+		hangentity.settTThem(hangInfo.gettTThem());	
+		hangentity.setTrangThai(hangInfo.getTrangThai());
 
 		session.update(hangentity);
 

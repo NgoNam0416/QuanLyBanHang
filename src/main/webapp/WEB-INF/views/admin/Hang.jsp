@@ -13,7 +13,7 @@
 					</div>
 					<div class="col-sm-6" style="text-align: right; font-size: 20px;">
 						<!-- <a href="#" style="font-size: 20px;margin-top: 20px"class="glyphicon glyphicon-plus">Thêm</a>  -->
-						<a href="${pageContext.request.contextPath}/admin/hang/addhang" class="btn btn-info "> <span class="fa fa-plus"></span>
+						<a href="${pageContext.request.contextPath}/admin/hang/addhang" class="btn btn-outline-success"> <span class="fa fa-plus"></span>
 							Thêm
 						</a>
 					</div>
@@ -33,13 +33,12 @@
 					<th></th>
 				</tr>
 			</thead>
-			<p>${loadHang}</p>
 			<tbody>
 				<c:forEach items="${loadHang}" var="h">
 					<tr>
 						<td>${h.tenHang}</td>
 						<td><img style="max-width: 50px; height: 50px"
-							src=""
+							src="${pageContext.request.contextPath}/template/client/img/${h.imageLink }"
 							alt=""></td>
 						<td>${h.donGia }</td>
 						<td>${h.soLuong}</td>

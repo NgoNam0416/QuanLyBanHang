@@ -89,7 +89,7 @@
 			<!-- Brand Logo -->
 			<a href="${pageContext.request.contextPath}/" class="brand-link"> <img src="${pageContext.request.contextPath}/template/client/img/logo.png" alt="Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light"> BANHANGONLINE</span>
+				<span class="brand-text font-weight-light"> VegetableShop</span>
 			</a>
 
 			<!-- Sidebar -->
