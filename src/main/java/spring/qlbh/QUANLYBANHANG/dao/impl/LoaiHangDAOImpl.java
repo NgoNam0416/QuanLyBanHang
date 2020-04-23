@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
 import spring.qlbh.QUANLYBANHANG.entity.LoaiHang;
+import spring.qlbh.QUANLYBANHANG.model.HangInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 
 public class LoaiHangDAOImpl implements LoaiHangDAO {
@@ -22,6 +23,11 @@ public class LoaiHangDAOImpl implements LoaiHangDAO {
 					+" from " + LoaiHang.class.getName() + " lh "; // select bÃ ng Hibernate thÃ¬ nÃ³ tráº£ vá»� 1 Ä‘á»‘i tÆ°á»£ng
 		Query query = session.createQuery(sql);
 		return query.list();
+	}
+	@Override
+	public List<HangInfo> loadHang() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
