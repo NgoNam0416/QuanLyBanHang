@@ -123,12 +123,6 @@ public class HangInfo {
 	public void settTThem(String tTThem) {
 		this.tTThem = tTThem;
 	}
-
-<<<<<<< HEAD
-	
-
-=======
->>>>>>> 21d5bd9e7fb3323e41c783e42342ca77a4984b34
 	public String getTrangThai() {
 		return trangThai;
 	}
