@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
 import spring.qlbh.QUANLYBANHANG.model.HangInfo;
+import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 
 @Controller(value = "QuanLyLoaiHangController")
 @RequestMapping(value = "/admin")
@@ -19,9 +20,9 @@ public class QuanLyLoaiHangController {
 	
 	@RequestMapping("/loaihang")
 	public String loadHang(Model model) {
-		List<HangInfo> loaihang = loaiHangDAO.loadHang();
+		List<LoaiHangInfo> loaihang = loaiHangDAO.loadMenu();
 		model.addAttribute("loadLoaiHang", loaihang);
-		return "admin/QlLoaiHang";
+		return "admin/QLLoaiHang";
 	}
 
 }
