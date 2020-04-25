@@ -116,7 +116,7 @@
 						</div>
 						<div class="row" style="margin-top: 10px">
 							<div class="col-sm-6">
-								<button type="submit" id=""
+								<button type="submit" id="ThemHang"
 									class="btn btn-primary" >Thêm</button>
 
 								<a href="${pageContext.request.contextPath}/admin/hang" class="btn btn-info "> <span></span> Cancel

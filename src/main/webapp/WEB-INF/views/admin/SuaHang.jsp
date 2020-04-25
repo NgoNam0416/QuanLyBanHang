@@ -88,8 +88,8 @@
 								<div class="form-group">
 									<label>Trạng Thái</label>
 									<form:select path="trangThai" class="form-control custom-select">
-										<form:option value="0" label="Đã bán" />
-										<form:option value="1" label="Chưa bán" />
+										<form:option value="Còn hàng" label="Còn hàng" />
+										<form:option value="Hết hàng" label="Hết hàng" />
 									</form:select>
 								</div>
 							</div>
@@ -100,7 +100,7 @@
 									<label>Thông Tin Thêm</label>
 									
 									<form:textarea path="tTThem" id="tTThem" class="form-control" style="height: 150px;"
-											placeholder="Nhập giới thiệu về hàng"></form:textarea>
+											placeholder="Nhập giới thiệu về hàng" ></form:textarea>
 								</div>
 							</div>
 						</div>

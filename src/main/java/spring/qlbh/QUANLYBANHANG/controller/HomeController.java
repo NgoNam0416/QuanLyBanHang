@@ -51,7 +51,7 @@ public class HomeController {
 		// load hàng theo loai
 		List<LoaiHangInfo> loaiHang = loaiHangDAO.loadMenu();
 		for (int i = 0; i < loaiHang.size(); i++) {
-			String ten = loaiHang.get(i).getTenLoai();
+			String ten = "Loai"+loaiHang.get(i).getMaLoai();
 			model.addAttribute(ten, hangDAO.loadHangTheoLoai(loaiHang.get(i).getMaLoai()));
 
 		}
@@ -193,5 +193,5 @@ public class HomeController {
 		}
 		return -1;
 	}
-
+		
 }

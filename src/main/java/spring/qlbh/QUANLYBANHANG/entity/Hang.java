@@ -18,7 +18,7 @@ public class Hang {
 	private String donVi;
 	private String NoiSX;
 	private String tTThem;
-	private int trangThai;
+	private String trangThai;
 	@Id
 	@Column(name="MaHang")
 	public int getMaHang() {
@@ -91,12 +91,14 @@ public class Hang {
 		this.tTThem = tTThem;
 	}
 	@Column(name="TrangThai")
-	public int getTrangThai() {
+	public String getTrangThai() {
 		return trangThai;
 	}
-	public void setTrangThai(int trangThai) {
+	public void setTrangThai(String trangThai) {
 		this.trangThai = trangThai;
 	}
+	
+	
 
 	
 	

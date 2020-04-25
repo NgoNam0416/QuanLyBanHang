@@ -22,7 +22,7 @@ public class HangDAOImpl implements HangDAO {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + HangInfo.class.getName()
 				+ " (h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai) " // cÃ¡c																																			// HangInfo
-				+ " from " + Hang.class.getName() + " h "+"where h.trangThai=0 "; // Ä‘á»ƒ Ã½ chá»— nÃ y, chá»— nÃ y
+				+ " from " + Hang.class.getName() + " h "; // Ä‘á»ƒ Ã½ chá»— nÃ y, chá»— nÃ y
 															// pháº£i cÃ¡ch ra, chá»© k nÃ³ lá»—i
 		Query query = session.createQuery(sql);
 		return query.list();
@@ -56,7 +56,7 @@ public class HangDAOImpl implements HangDAO {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + HangInfo.class.getName()
 				+ " ( h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai) "
-				+ " from " + Hang.class.getName() + " h " + " where h.tenHang=: tenHang and h.trangThai=0 ";
+				+ " from " + Hang.class.getName() + " h " + " where h.tenHang=: tenHang";
 		Query query = session.createQuery(sql);
 		query.setParameter("tenHang", tenHang);
 		return (HangInfo) query.uniqueResult();

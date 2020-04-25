@@ -13,7 +13,7 @@ public class HangInfo {
 	private String donVi;
 	private String noiSX;
 	private String tTThem;
-	private int trangThai;
+	private String trangThai;
 	private CommonsMultipartFile anh;
 	
 
@@ -29,7 +29,7 @@ public class HangInfo {
 	
 
 	public HangInfo(int maHang, String tenHang, String imageLink, String ngayNhapHang, int donGia, int maLoai,
-			float soLuong, String donVi, String noiSX, String tTThem, int trangThai) {
+			float soLuong, String donVi, String noiSX, String tTThem, String trangThai) {
 		super();
 		this.maHang = maHang;
 		this.tenHang = tenHang;
@@ -124,11 +124,13 @@ public class HangInfo {
 		this.tTThem = tTThem;
 	}
 
-	public int getTrangThai() {
+	
+
+	public String getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(int trangThai) {
+	public void setTrangThai(String trangThai) {
 		this.trangThai = trangThai;
 	}
 

@@ -78,7 +78,7 @@ public class QuanLyHangController {
 		String donVi= suaHangInfo.getDonVi();
 		String noiSX = suaHangInfo.getNoiSX();
 		String tTThem = suaHangInfo.gettTThem();
-		int trangThai = suaHangInfo.getTrangThai();
+		String trangThai = suaHangInfo.getTrangThai();
 		
 		CommonsMultipartFile fileDatas = suaHangInfo.getAnh();
 
@@ -116,7 +116,7 @@ public class QuanLyHangController {
 	@RequestMapping(value = "/addhang/them", method = RequestMethod.POST)
 	public String addHang(Model model, HttpServletRequest request, @ModelAttribute("hangInfo") HangInfo hangInfo) {
 
-		boolean kt = false;
+		String kt ;
 		Random rand = new Random();
 
 		int maHang = rand.nextInt(1000);
@@ -129,22 +129,21 @@ public class QuanLyHangController {
 		String donVi= hangInfo.getDonVi();
 		String noiSX = hangInfo.getNoiSX();
 		String tTThem = hangInfo.gettTThem();
-		int trangThai = hangInfo.getTrangThai();
+		String trangThai = hangInfo.getTrangThai();
 
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
 
 		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
-		if (hangDAO.loadHangTheoTen(tenHang) == null) {
+		if (tenHang!=null && donVi!=null && noiSX!=null) {
 			HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 					soLuong, donVi, noiSX, tTThem, trangThai);
 			// call goi ham insert
 			hangDAO.insertHang(hang);
 			// call up file.
 			doUpload(request, hangInfo);
-			kt = true;
 		} else {
-			kt = false;
+			kt = "khong nhap trong";
 		}
 
 		return "redirect:/admin/hang";
