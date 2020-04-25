@@ -131,11 +131,11 @@ public class QuanLyHangController {
 		String trangThai = hangInfo.getTrangThai();
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
 		String imageLink = fileDatas.getOriginalFilename();
+		
 					HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 					soLuong, donVi, noiSX, tTThem, trangThai);
 			hangDAO.insertHang(hang);
 			doUpload(request, hangInfo);
-		
 		return "redirect:/admin/hang";
 	}
 

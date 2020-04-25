@@ -35,7 +35,7 @@ public class DongDonHangDAOImpl implements DongDonHangDAO{
 	public List<DanhSachHang> XemDonHang(int maDH) {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + DanhSachHang.class.getName()
-				+ " (h.maHang,h.tenHang,h.donGia,h.imageLink, ddh.soLuong) " + " from " 
+				+ " (h.maHang,h.tenHang,h.donGia,h.image, ddh.soLuong) " + " from " 
 				+ DongDonHang.class.getName()
 				+ " ddh, " + Hang.class.getName() + " h "
 				+ " where ddh.maHang=h.maHang and ddh.maDH=:maDH";
