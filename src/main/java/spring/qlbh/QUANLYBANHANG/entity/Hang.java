@@ -16,7 +16,7 @@ public class Hang {
 	private int maLoai;
 	private float soLuong;
 	private String donVi;
-	private String NoiSX;
+	private String noiSX;
 	private String tTThem;
 	private String trangThai;
 	@Id
@@ -78,10 +78,10 @@ public class Hang {
 	}
 	@Column(name="NoiSX")
 	public String getNoiSX() {
-		return NoiSX;
+		return noiSX;
 	}
 	public void setNoiSX(String noiSX) {
-		NoiSX = noiSX;
+		this.noiSX = noiSX;
 	}
 	@Column(name="TTThem")
 	public String gettTThem() {

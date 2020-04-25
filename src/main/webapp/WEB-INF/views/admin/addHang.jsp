@@ -60,8 +60,8 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Nơi Sản Xuất</label>
-									<form:input path="NoiSX" type="text" class="form-control"
-										placeholder="Nhập tên nhà sản xuất" id="NoiSX" />
+									<form:input path="noiSX" type="text" class="form-control"
+										placeholder="Nhập tên nhà sản xuất" id="noiSX" />
 
 								</div>
 							</div>
@@ -87,8 +87,8 @@
 								<div class="form-group">
 									<label>Trạng Thái</label>
 									<form:select path="trangThai" class="form-control custom-select">
-										<form:option value="0" label="Đã bán" />
-										<form:option value="1" label="Chưa bán" />
+										<form:option value="Bán" label="Bán" />
+										<form:option value="Không bán" label="Không bán" />
 									</form:select>
 								</div>
 							</div>

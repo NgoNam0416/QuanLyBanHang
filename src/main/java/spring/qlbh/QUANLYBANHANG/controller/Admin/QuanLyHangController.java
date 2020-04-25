@@ -121,7 +121,6 @@ public class QuanLyHangController {
 
 		int maHang = rand.nextInt(1000);
 		String tenHang = hangInfo.getTenHang();
-//		String imageLike = suaHangInfo.getImageLink();
 		String ngayNhapHang= hangInfo.getNgayNhapHang();
 		int donGia = hangInfo.getDonGia();
 		int maLoai =hangInfo.getMaLoai();
@@ -130,56 +129,34 @@ public class QuanLyHangController {
 		String noiSX = hangInfo.getNoiSX();
 		String tTThem = hangInfo.gettTThem();
 		String trangThai = hangInfo.getTrangThai();
-
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
-
-		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
-		if (tenHang!=null && donVi!=null && noiSX!=null) {
-			HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
+					HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 					soLuong, donVi, noiSX, tTThem, trangThai);
-			// call goi ham insert
 			hangDAO.insertHang(hang);
-			// call up file.
 			doUpload(request, hangInfo);
-		} else {
-			kt = "khong nhap trong";
-		}
-
+		
 		return "redirect:/admin/hang";
 	}
 
 	private void doUpload(HttpServletRequest request, //
 			HangInfo hangInfo) {
-
-// ThÆ° má»¥c gá»‘c upload file.
 		String uploadRootPath = request.getServletContext().getRealPath("/") + "template/client/img";
 		System.out.println("uploadRootPath=" + uploadRootPath);
-
 		File uploadRootDir = new File(uploadRootPath);
-//
-// Táº¡o thÆ° má»¥c gá»‘c upload náº¿u nÃ³ khÃ´ng tá»“n táº¡i.
 		if (!uploadRootDir.exists()) {
 			uploadRootDir.mkdirs();
 		}
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
-//
 		List<File> uploadedFiles = new ArrayList<File>();
-
-// TÃªn file gá»‘c táº¡i Clientg
 		String name = fileDatas.getOriginalFilename();
 		System.out.println("Client File Name = " + name);
-
 		if (name != null && name.length() > 0) {
 			try {
-				// Táº¡o file táº¡i Server.
 				File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
-
-				// Luá»“ng ghi dá»¯ liá»‡u vÃ o file trÃªn Server.
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(fileDatas.getBytes());
 				stream.close();
-				//
 				uploadedFiles.add(serverFile);
 				System.out.println("Write file: " + serverFile);
 			} catch (Exception e) {

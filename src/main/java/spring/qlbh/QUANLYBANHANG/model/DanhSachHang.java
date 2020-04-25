@@ -8,6 +8,7 @@ public class DanhSachHang {
 	private int donGia;
 	private String imageLink;
 	private int soLuong;
+	
 	public DanhSachHang(int maHang, String tenHang, int donGia, String imageLink, int soLuong) {
 		super();
 		this.maHang = maHang;
