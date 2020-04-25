@@ -113,7 +113,7 @@ public class HangInfo {
 	}
 
 	public void setNoiSX(String noiSX) {
-		noiSX = noiSX;
+		this.noiSX = noiSX;
 	}
 
 	public String gettTThem() {

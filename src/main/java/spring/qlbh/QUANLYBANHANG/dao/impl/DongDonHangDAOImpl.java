@@ -28,15 +28,17 @@ public class DongDonHangDAOImpl implements DongDonHangDAO{
 		
 
 		session.persist(dongDonHangEntity);
+		
+		
 	}
 	@Override
 	public List<DanhSachHang> XemDonHang(int maDH) {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + DanhSachHang.class.getName()
-				+ " (h.maHang,h.tenHang,h.donGia,h.imageLink, ddh.soLuong) " + " from " 
+				+ " (h.maHang,h.tenHang,h.donGia,h.image, ddh.soLuong) " + " from " 
 				+ DongDonHang.class.getName()
-				+ " ddh, " + DonHang.class.getName() + " dh, " + Hang.class.getName() + " h "
-				+ " where ddh.maDH=dh.maDH and ddh.maHang=h.maHang and dh.maDH=:maDH";
+				+ " ddh, " + Hang.class.getName() + " h "
+				+ " where ddh.maHang=h.maHang and ddh.maDH=:maDH";
 		Query query = session.createQuery(sql);
 		query.setParameter("maDH", maDH);
 		return query.list();
