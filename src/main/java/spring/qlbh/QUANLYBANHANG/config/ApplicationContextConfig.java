@@ -24,11 +24,12 @@ import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
-
+import spring.qlbh.QUANLYBANHANG.dao.NguoiDungDAO;
 import spring.qlbh.QUANLYBANHANG.dao.impl.DonHangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.DongDonHangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.HangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.LoaiHangDAOImpl;
+import spring.qlbh.QUANLYBANHANG.dao.impl.NguoiDungDAOImpl;
 
 
 @Configuration
@@ -123,5 +124,8 @@ public class ApplicationContextConfig {
 	public DongDonHangDAO XemDonHang() {
 		return new DongDonHangDAOImpl();
 	}
-
+	@Bean(name="nguoi_dung_DAO")
+	public NguoiDungDAO XemNguoiDung() {
+		return new NguoiDungDAOImpl();
+	}
 }

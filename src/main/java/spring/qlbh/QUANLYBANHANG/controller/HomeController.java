@@ -22,7 +22,6 @@ import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
-
 import spring.qlbh.QUANLYBANHANG.model.DonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.DongDonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.GioHangInfo;
@@ -36,7 +35,8 @@ public class HomeController {
 	private HangDAO hangDAO;
 	@Autowired
 	private LoaiHangDAO loaiHangDAO;
-
+	@Autowired
+	private NguoiDungDAO nguoiDungDAO;
 	@Autowired
 	private DonHangDAO donHangDAO;
 	@Autowired
@@ -210,5 +210,27 @@ public class HomeController {
 		}
 		return -1;
 	}
-
+		//login
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public String loginPage(Model model, @RequestParam String userName,
+				@RequestParam String passWord, HttpSession session) {
+			String request = "";
+			NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
+			if(us !=null) {
+				String loai=us.getLoai();
+				if(loai.equals("0")) {
+					session.setAttribute("checkUser", us);
+					request = "redirect:/admin/hang";	
+				} else {
+					session.setAttribute("checkUser",us);
+					request = "redirect:/";
+				}
+			}
+			else {
+				session.setAttribute("loginF","TÃªn Ä‘Äƒng nháº­p vÃ  máº­t kháº©u sai");
+				request="redirect:/";
+			}
+			session.removeAttribute("cart");
+			return request;
+		}
 }
