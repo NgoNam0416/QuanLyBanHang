@@ -44,8 +44,8 @@
 										<div class="row">
 											<div class="col-4" style="padding-left: 15px;padding-top:5px;">
 											<a href="${pageContext.request.contextPath}">
-												<button type="submit" name="submit" style="width: 25%;"
-													class="btn btn-primary btn-block">Sign In</button></a>
+												<button type="submit" name="submit" style="width: 40%;"
+													class="btn btn-primary btn-block">Đăng Nhập</button></a>
 											</div>
 											<!-- /.col -->
 										</div>

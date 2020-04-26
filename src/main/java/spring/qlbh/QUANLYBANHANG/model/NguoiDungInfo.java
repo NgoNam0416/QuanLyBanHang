@@ -26,6 +26,10 @@ public class NguoiDungInfo {
 	}
 	
 	
+	public NguoiDungInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public NguoiDungInfo(int maND, String tenDN, String matKhau, String hoTen, String image, String diaChi, int sDT,
 			String email, String loai) {
 		super();

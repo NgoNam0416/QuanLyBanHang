@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!-- FOOTER -->
 <footer id="footer">
 	<!-- top footer -->
@@ -9,27 +10,24 @@
 			<div class="row">
 				<div class="col-md-3 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">About Us</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut.</p>
+						<h3 class="footer-title">VỀ CHÚNG TÔI</h3>
+						<p>VegetableShop là nơi cung cấp các mặt hàng sạch và tươi, đảm bảo chất lượng.
+						Chúng tôi luôn phục vụ nhiệt tình và chu đáo</p>
 						<ul class="footer-links">
-							<li><a href="#"><i class="fa fa-map-marker"></i>1734
-									Stonecoal Road</a></li>
-							<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-							<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+							<li><a href="#"><i class="fa fa-map-marker"></i>Ngô Mây - Quy Nhơn</a></li>
+							<li><a href="#"><i class="fa fa-phone"></i>SDT: 0979789999</a></li>
+							<li><a href="#"><i class="fa fa-envelope-o"></i>ngodinhnam0416@email.com</a></li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="col-md-3 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">Categories</h3>
+						<h3 class="footer-title">Mục bạn có thể quan tâm</h3>
 						<ul class="footer-links">
-							<li><a href="#">Hot deals</a></li>
-							<li><a href="#">Laptops</a></li>
-							<li><a href="#">Smartphones</a></li>
-							<li><a href="#">Cameras</a></li>
-							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Ưu đãi lớn</a></li>
+							<li><a href="#">Sản phẩm được yêu thích</a></li>
+							
 						</ul>
 					</div>
 				</div>
@@ -38,26 +36,24 @@
 
 				<div class="col-md-3 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">Information</h3>
+						<h3 class="footer-title">THÔNG TIN</h3>
 						<ul class="footer-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Orders and Returns</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
+							<li><a href="#">Chính sách bảo mật</a></li>
+							<li><a href="#">Điều khoản và điều kiện</a></li>
+							<li><a href="#">Quyền lợi người dùng</a></li>
+						
 						</ul>
 					</div>
 				</div>
-
-				<div class="col-md-3 col-xs-6">
+	<div class="col-md-3 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">Service</h3>
+						<h3 class="footer-title">DỊCH VỤ</h3>
 						<ul class="footer-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">View Cart</a></li>
-							<li><a href="#">Wishlist</a></li>
-							<li><a href="#">Track My Order</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="#">Tài khoản của tôi</a></li>
+							<li><a href="#">Xem giỏ hàng</a></li>
+							<li><a href="#">Danh sách mong muốn</a></li>
+							<li><a href="#">Theo dõi đơn hàng của tôi</a></li>
+							<li><a href="#">Trợ giúp</a></li>
 						</ul>
 					</div>
 				</div>
