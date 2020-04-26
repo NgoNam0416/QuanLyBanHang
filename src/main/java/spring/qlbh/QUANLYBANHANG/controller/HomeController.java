@@ -198,6 +198,7 @@ public class HomeController {
 		@RequestMapping(value = "/login", method = RequestMethod.POST)
 		public String loginPage(Model model, @RequestParam String userName,
 				@RequestParam String passWord, HttpSession session) {
+			
 			String request = "";
 			NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
 			if(us !=null) {
@@ -209,11 +210,11 @@ public class HomeController {
 					session.setAttribute("checkUser",us);
 					request = "redirect:/";
 				}
+			}else {
+				session.setAttribute("loginF","Tên đăng nhập sai");
+				request = "redirect:/";
 			}
-			else {
-				session.setAttribute("loginF","TÃªn Ä‘Äƒng nháº­p vÃ  máº­t kháº©u sai");
-				request="redirect:/";
-			}
+			
 			session.removeAttribute("cart");
 			return request;
 		}

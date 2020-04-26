@@ -25,17 +25,17 @@
 							<div class="cart-dropdown"style="width: 300px; max-height: 190px;overflow-y: visible;margin-bottom: 5px;>
 								<div class="cart-list"    ">
 									<form action="${pageContext.request.contextPath}/login"
-										method="post" name="formdangnhap">
+										method="post" name="formdangnhap" onsubmit="return myFunction()">
 										<h3>Đăng Nhập</h3>
 										<div class="input-group" style="width:250px;">
-											<input type="text" name="userName" class="form-control"
+											<input type="text" name="userName" id="userName" class="form-control"
 												placeholder="Username" required>
 											<div class="input-group-append">
 												
 											</div>
 										</div>
 										<div class="input-group "style="width:250px;padding-top:5px;">
-											<input type="password" name="passWord" class="form-control"
+											<input type="password" name="passWord" id="passWord" class="form-control"
 												placeholder="Password" required>
 											<div class="input-group-append">
 												
@@ -54,6 +54,21 @@
 										</div>
 										 
 									</form>
+									<script type="text/javascript">
+			function myFunction() {
+			var userName= document.getElementById("userName").value;
+			var passWord= document.getElementById("passWord").value;
+				
+			 submitOK = "true";			 
+			if(${loginF != null}){
+				 alert("Tên đăng nhập hoặc mật khẩu sai");
+				    submitOK = "false";
+			}else{
+				 submitOK = "true";
+			}
+			
+			}
+		</script>
 									</body>
 
 								</div>

@@ -110,7 +110,7 @@
 									<label>Thông Tin Thêm</label>
 									
 									<form:textarea path="tTThem" id="tTThem" class="form-control" style="height: 150px;"
-											placeholder="Nhập giới thiệu về hàng" "></form:textarea>
+											placeholder="Nhập giới thiệu về hàng"></form:textarea>
 								</div>
 							</div>
 						</div>

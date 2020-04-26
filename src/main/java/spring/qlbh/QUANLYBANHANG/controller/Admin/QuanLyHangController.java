@@ -78,14 +78,13 @@ public class QuanLyHangController {
 		String donVi= suaHangInfo.getDonVi();
 		String noiSX = suaHangInfo.getNoiSX();
 		String tTThem = suaHangInfo.gettTThem();
-		String trangThai = suaHangInfo.getTrangThai();
-		
+		String trangThai = suaHangInfo.getTrangThai();		
 		CommonsMultipartFile fileDatas = suaHangInfo.getAnh();
-
 		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
 		HangInfo suahang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 				soLuong, donVi, noiSX, tTThem, trangThai);
+		
 		// call goi ham sua
 		hangDAO.uploadHang(suahang);
 		// call up file.
