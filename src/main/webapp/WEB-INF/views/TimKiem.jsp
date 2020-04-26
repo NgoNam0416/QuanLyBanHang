@@ -56,14 +56,14 @@
 											</div>
 										</div>
 										<div class="add-to-cart">
-											<c:if test="${tkh.soLuongHang < 1 }">
+											<c:if test="${tkh.soLuong < 1 }">
 												<a href="#">
 													<button class="add-to-cart-btn">
 														<i class="fa fa-shopping-cart"></i> Hết Hàng
 													</button>
 												</a>
 											</c:if>
-											<c:if test="${tkh.soLuongHang > 0 }">
+											<c:if test="${tkh.soLuong > 0 }">
 												<a
 													href="${pageContext.request.contextPath}/buy/${tkh.maHang }">
 													<button class="add-to-cart-btn">
