@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+
 import spring.qlbh.QUANLYBANHANG.entity.NguoiDung;
 import spring.qlbh.QUANLYBANHANG.model.NguoiDungInfo;
 
