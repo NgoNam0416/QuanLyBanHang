@@ -69,18 +69,12 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
-	<!--  	<c:if test="${thongbao != null }">
-		<script type="text/javascript">
-		function myFunction() {
-		 	alert("Vui lòng điền đủ thông tin");
-		 	
-		}
-	 </script>
-	 -->
-	</c:if>
 	<c:if test="${thongbao != null }">
-			<script type="text/javascript">
+		<script type="text/javascript">									
+			alert("Tên đăng đã tồn tại");																
+		</script>	
+	</c:if>
+		<script type="text/javascript">
 			function myFunction() {
 			var tenDN= document.getElementById("tenDN").value;
 			var image= document.getElementById("file-2").value;
@@ -105,6 +99,19 @@
 				  }
 			}
 		</script>
+		</div>
+		</form:form>
+	<!--  	<c:if test="${thongbao != null }">
+		<script type="text/javascript">
+		function myFunction() {
+		 	alert("Vui lòng điền đủ thông tin");
+		 	
+		}
+	 </script>
+	 -->
 	</c:if>
+	
+
+	
 </body>
 </html>

@@ -54,7 +54,7 @@ public class HomeController {
 
 	// trang chủ
 	@RequestMapping("/")
-	public String indexPage(Model model) {
+	public String indexPage(Model model,HttpServletRequest request, HttpSession session) {
 		// load hang
 		List<HangInfo> hang = hangDAO.loadHang();
 		// load hàng theo loai
@@ -66,6 +66,15 @@ public class HomeController {
 		}
 		model.addAttribute("hang", hang);
 		model.addAttribute("loaiHang", loaiHang);
+		
+		// get lỗi và set vào request
+		// set vào session phải nhớ clearr khi không cần nữa
+		Object loginF = session.getAttribute("loginF");
+		session.removeAttribute("loginF"); 
+		if(loginF!=null) {
+			request.setAttribute("loginF", loginF);
+			
+		}
 		return "Index";
 	}
 
@@ -222,30 +231,35 @@ public class HomeController {
 	//login
 			@RequestMapping(value = "/login", method = RequestMethod.POST)
 			public String loginPage(Model model, @RequestParam String userName,
-					@RequestParam String passWord, HttpSession session) {
-				String request = "";
+					@RequestParam String passWord, HttpSession session, HttpServletRequest request) {
+				String page = "";
 				NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
 				if(us !=null) {
 					String loai=us.getLoai();
 					if(loai.equals("0")) {
 						session.setAttribute("checkUser", us);
-						request = "redirect:/admin/hang";	
+						page = "redirect:/admin/hang";	
 					} else {
 						session.setAttribute("checkUser",us);
-						request = "redirect:/";
+						page = "redirect:/";
 					}
 				}
 				else {
 					session.setAttribute("loginF","ten sai");
-					request="redirect:/";
+					page="redirect:/";
 				}
 				session.removeAttribute("cart");
-				return request;
+				return page;
 			}
 		@RequestMapping("/dangky")
-		public String DangKyPage(Model model) {
+		public String DangKyPage(Model model,HttpServletRequest request, HttpSession session) {
 			NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
 			model.addAttribute("nguoiDungInfo", nguoiDungInfo);
+			Object thongbao = session.getAttribute("thongbao");
+			session.removeAttribute("thongbao"); 
+			if(thongbao!=null) {
+				request.setAttribute("thongbao", thongbao);				
+			}
 			return "DangKy";
 		}
 		@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
@@ -269,7 +283,7 @@ public class HomeController {
 			nguoiDungDAO.insertNguoiDung(nd);
 				doUpload(request, nguoiDungInfo);
 			}else {
-				request.setAttribute("thongbao", "Mã Trùng");
+				session.setAttribute("thongbao", "Mã Trùng");
 				requestpage = "redirect:/dangky";
 			}
 			return "redirect:/";
