@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import spring.qlbh.QUANLYBANHANG.entity.LoaiHang;
 import spring.qlbh.QUANLYBANHANG.model.HangInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 
@@ -11,5 +12,11 @@ import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 public interface LoaiHangDAO {
 	public List<LoaiHangInfo> loadMenu();
 
-	public List<HangInfo> loadHang();
+	
+
+	public void xoaLoai(int maLoai);
+
+	LoaiHang findLoaiHang(int maLoai);
+	public void themLoaiHang(LoaiHangInfo loaihang);
+
 }

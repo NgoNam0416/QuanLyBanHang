@@ -23,11 +23,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
+import spring.qlbh.QUANLYBANHANG.dao.KhuyenMaiDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.NguoiDungDAO;
 import spring.qlbh.QUANLYBANHANG.dao.impl.DonHangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.DongDonHangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.HangDAOImpl;
+import spring.qlbh.QUANLYBANHANG.dao.impl.KhuyenMaiDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.LoaiHangDAOImpl;
 import spring.qlbh.QUANLYBANHANG.dao.impl.NguoiDungDAOImpl;
 
@@ -127,5 +129,9 @@ public class ApplicationContextConfig {
 	@Bean(name="nguoi_dung_DAO")
 	public NguoiDungDAO XemNguoiDung() {
 		return new NguoiDungDAOImpl();
+	}
+	@Bean(name="khuyen_mai_DAO")
+	public KhuyenMaiDAO XemKhuyenMai() {
+		return new KhuyenMaiDAOImpl();
 	}
 }

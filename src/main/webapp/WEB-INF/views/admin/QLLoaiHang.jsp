@@ -13,8 +13,8 @@
 					</div>
 					<div class="col-sm-6" style="text-align: right; font-size: 20px;">
 						<!-- <a href="#" style="font-size: 20px;margin-top: 20px"class="glyphicon glyphicon-plus">Thêm</a>  -->
-						<a href="" class="btn btn-info "> <span class="fa fa-plus"></span>
-							Thêm loại hàng
+						<a href="${pageContext.request.contextPath}/admin/loaihang/them" class="btn btn-outline-success"> <span class="fa fa-plus"></span>
+							Thêm
 						</a>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 									<i class="fa fa-edit" aria-hidden="true"></i>
 								</button>
 						</a>
-						<a href="" onclick="
+						<a href="${pageContext.request.contextPath}/admin/loaihang/xoaloai?maHang=${h.maLoai }" onclick="
 							return confirm('Bạn có chắc chắn muốn xóa loại hàng này không? ')">
 						<button data-toggle="tooltip"
 								style="border: 2px solid lightgrey; border-radius: 5px;"
