@@ -261,6 +261,7 @@ public class HomeController {
 			if(thongbao!=null) {
 				request.setAttribute("thongbao", thongbao);				
 			}
+			
 			return "DangKy";
 		}
 		@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
@@ -282,12 +283,21 @@ public class HomeController {
 					Email, loai);
 			if(nguoiDungDAO.checkTrungTenDN(tenDN)==null) {
 			nguoiDungDAO.insertNguoiDung(nd);
-				doUpload(request, nguoiDungInfo);
+			doUpload(request, nguoiDungInfo);
+			NguoiDungInfo us= nguoiDungDAO.checkLogin(tenDN,matKhau);
+			if(us !=null) {
+				String loaind=us.getLoai();
+				if(loaind.equals("1")) {
+					session.setAttribute("checkUser", us);
+					requestpage = "redirect:/";
+				}
+			}
+			requestpage="redirect:/";
 			}else {
 				session.setAttribute("thongbao", "Mã Trùng");
 				requestpage = "redirect:/dangky";
 			}
-			return "redirect:/";
+			return requestpage;
 		}
 	//upload anh
 		private void doUpload(HttpServletRequest request, //

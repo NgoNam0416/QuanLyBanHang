@@ -83,6 +83,7 @@
 			alert("Tên đăng đã tồn tại");																
 		</script>	
 	</c:if>
+
 		<script type="text/javascript">
 			function myFunction() {
 			var tenDN= document.getElementById("tenDN").value;
