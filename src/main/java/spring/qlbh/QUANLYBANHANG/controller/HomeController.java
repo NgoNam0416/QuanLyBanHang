@@ -35,6 +35,7 @@ import spring.qlbh.QUANLYBANHANG.model.DonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.DongDonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.GioHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.HangInfo;
+import spring.qlbh.QUANLYBANHANG.model.HangKhuyenMaiInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.NguoiDungInfo;
 
@@ -56,7 +57,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String indexPage(Model model,HttpServletRequest request, HttpSession session) {
 		// load hang
-		List<HangInfo> hang = hangDAO.loadHang();
+		List<HangKhuyenMaiInfo> hang = hangDAO.loadHangKM();
 		// load hàng theo loai
 		List<LoaiHangInfo> loaiHang = loaiHangDAO.loadMenu();
 		for (int i = 0; i < loaiHang.size(); i++) {
@@ -81,7 +82,7 @@ public class HomeController {
 	@RequestMapping("/chitiet")
 	public String chiTietHang(Model model, HttpServletRequest request) {
 		int maHang = Integer.parseInt(request.getParameter("id"));
-		HangInfo hang = hangDAO.loadHangTheoId(maHang);
+		HangKhuyenMaiInfo hang = hangDAO.loadHangKMTheoId(maHang);
 		model.addAttribute("hang_chitiet", hang);
 		return "ChiTietHang";
 	}
@@ -97,14 +98,14 @@ public class HomeController {
 		if (session.getAttribute("cart") == null) {
 			// Tạo giỏ hàng
 			List<GioHangInfo> cart = new ArrayList<GioHangInfo>();
-			cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
+			cart.add(new GioHangInfo(hangDAO.loadHangKMTheoId(id), 1));
 			session.setAttribute("cart", cart);
 		} else {
 			List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
 			int index = this.exists(id, cart);
 			if (index == -1) {
 				// thêm hàng không có trong giỏ
-				cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
+				cart.add(new GioHangInfo(hangDAO.loadHangKMTheoId(id), 1));
 			} else {
 				// thay đổi số lượng trong giỏ
 				int quantity = cart.get(index).getSoLuong();
@@ -173,7 +174,7 @@ public class HomeController {
 		List<GioHangInfo> gH = (List<GioHangInfo>) session.getAttribute("cart");
 		float tongTien = 0;
 		for (GioHangInfo hg : gH) {
-			tongTien = tongTien + (hg.getSoLuong() * hg.getHang().getDonGia());
+			tongTien = tongTien + (hg.getSoLuong() * (hg.getHangKM().getDonGia()-hg.getHangKM().getDonGia()*hg.getHangKM().getPhanTram()/100));
 		}
 		if (session.getAttribute("checkUser") != null) {
 			NguoiDungInfo nguoiDung = (NguoiDungInfo) session.getAttribute("checkUser");
@@ -196,9 +197,9 @@ public class HomeController {
 		for (GioHangInfo hg1 : gH) {
 			int maDongDonHang = maRamdom();
 			DongDonHangInfo dongdonhang = new DongDonHangInfo(maDongDonHang, hg1.getSoLuong(),
-					hg1.getHang().getMaHang(), maDonHang);
+					hg1.getHangKM().getMaHang(), maDonHang);
 			dongDonHangDAO.insertDH(dongdonhang);
-			HangInfo hang = hangDAO.loadHangTheoId(hg1.getHang().getMaHang());
+			HangInfo hang = hangDAO.loadHangTheoId(hg1.getHangKM().getMaHang());
 			HangInfo hangTT = new HangInfo(hang.getMaHang(), hang.getTenHang(), hang.getImageLink(),
 					hang.getNgayNhapHang(), hang.getDonGia(), hang.getMaLoai(), hang.getSoLuong() - hg1.getSoLuong(),
 					hang.getDonVi(), hang.getNoiSX(), hang.gettTThem(), hang.getTrangThai());
@@ -222,7 +223,7 @@ public class HomeController {
 
 	private int exists(int id, List<GioHangInfo> cart) {
 		for (int i = 0; i < cart.size(); i++) {
-			if (cart.get(i).getHang().getMaHang() == id) {
+			if (cart.get(i).getHangKM().getMaHang() == id) {
 				return i;
 			}
 		}

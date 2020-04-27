@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.entity.Hang;
+import spring.qlbh.QUANLYBANHANG.entity.KhuyenMai;
+import spring.qlbh.QUANLYBANHANG.entity.LoaiHang;
 import spring.qlbh.QUANLYBANHANG.model.HangInfo;
+import spring.qlbh.QUANLYBANHANG.model.HangKhuyenMaiInfo;
 
 public class HangDAOImpl implements HangDAO {
 	@Autowired
@@ -27,19 +30,35 @@ public class HangDAOImpl implements HangDAO {
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
-
+	@Override
+	public List<HangKhuyenMaiInfo> loadHangKM(){
+		Session session = sessionfactory.getCurrentSession();
+		String sql = " select new  " + HangKhuyenMaiInfo.class.getName()
+				+ " (h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai,km.phanTram) " // cÃ¡c																																			// HangInfo
+				+ " from " + Hang.class.getName() + " h "+"LEFT JOIN "+ LoaiHang.class.getName() + " lh "+"ON h.maLoai=lh.maLoai LEFT JOIN "+ KhuyenMai.class.getName() + " km "+"ON lh.maKM=km.maKM"; // Ä‘á»ƒ Ã½ chá»— nÃ y, chá»— nÃ y											// pháº£i cÃ¡ch ra, chá»© k nÃ³ lá»—i
+		Query query = session.createQuery(sql);
+		return query.list();
+	}
 	// load hÃ ng theo loáº¡i
 	@Override
-	public List<HangInfo> loadHangTheoLoai(int maLoai) {
+	public List<HangKhuyenMaiInfo> loadHangTheoLoai(int maLoai) {
 		Session session = sessionfactory.getCurrentSession();
-		String sql = " select new  " + HangInfo.class.getName()
-				+ " (h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai) " 
-				+ " from " + Hang.class.getName() + " h " + " where h.maLoai=: maLoai";
+		String sql = " select new  " + HangKhuyenMaiInfo.class.getName()
+				+ " (h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai,km.phanTram) " 
+				+ " from " + Hang.class.getName() + " h " + "LEFT JOIN "+ LoaiHang.class.getName() + " lh "+"ON h.maLoai=lh.maLoai LEFT JOIN "+ KhuyenMai.class.getName() + " km "+"ON lh.maKM=km.maKM"+" where h.maLoai=: maLoai";
 		Query query = session.createQuery(sql);
 		query.setParameter("maLoai", maLoai);
 		return query.list();
 	}
-
+	public HangKhuyenMaiInfo loadHangKMTheoId(int maHang) {
+		Session session = sessionfactory.getCurrentSession();
+		String sql = " select new  " +HangKhuyenMaiInfo.class.getName()
+				+ " (h.maHang,h.tenHang,h.image,h.ngayNhapHang,h.donGia,h.maLoai,h.soLuong,h.donVi,h.noiSX,h.tTThem,h.trangThai,km.phanTram) "
+				+ " from " + Hang.class.getName() + " h " + "LEFT JOIN "+ LoaiHang.class.getName() + " lh "+"ON h.maLoai=lh.maLoai LEFT JOIN "+ KhuyenMai.class.getName() + " km "+"ON lh.maKM=km.maKM"+" where h.maHang=: maHang  ";
+		Query query = session.createQuery(sql);
+		query.setParameter("maHang", maHang);
+		return (HangKhuyenMaiInfo) query.uniqueResult();
+	}
 	@Override
 	public HangInfo loadHangTheoId(int maHang) {
 		Session session = sessionfactory.getCurrentSession();

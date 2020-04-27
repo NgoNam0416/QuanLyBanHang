@@ -1,22 +1,22 @@
 package spring.qlbh.QUANLYBANHANG.model;
 
 public class GioHangInfo {
-	private HangInfo hang;
+	private HangKhuyenMaiInfo hangKM;
 	private int soLuong;
-	public GioHangInfo(HangInfo hang, int soLuong) {
+	public GioHangInfo(HangKhuyenMaiInfo hangKM, int soLuong) {
 		super();
-		this.hang = hang;
+		this.hangKM = hangKM;
 		this.soLuong = soLuong;
 	}
 	public GioHangInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public HangInfo getHang() {
-		return hang;
+	public HangKhuyenMaiInfo getHangKM() {
+		return hangKM;
 	}
-	public void setHang(HangInfo hang) {
-		this.hang = hang;
+	public void setHangKM(HangKhuyenMaiInfo hangKM) {
+		this.hangKM = hangKM;
 	}
 	public int getSoLuong() {
 		return soLuong;
@@ -24,6 +24,7 @@ public class GioHangInfo {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
+	
 	
 
 }
