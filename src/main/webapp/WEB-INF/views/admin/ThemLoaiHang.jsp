@@ -39,7 +39,7 @@
 							</div>
 						  	<div class="col-sm-6">
 								<div class="form-group">
-									<label>Loại Hàng</label>  
+									<label>Mã khuyến mãi</label>  
 									<form:select path="maKM" class="form-control custom-select">
 										<form:options items="${khuyenMai}" itemLabel="tenKM"
 											itemValue="maKM" />

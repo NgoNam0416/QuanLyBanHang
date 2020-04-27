@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import spring.qlbh.QUANLYBANHANG.dao.KhuyenMaiDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
 import spring.qlbh.QUANLYBANHANG.model.KhuyenMaiInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
-
+@Transactional
 @Controller(value = "QuanLyLoaiHangController")
 @RequestMapping(value = "/admin/loaihang")
 public class QuanLyLoaiHangController {
@@ -35,10 +36,10 @@ public class QuanLyLoaiHangController {
 	@RequestMapping(value = "/them")
 	public String themLoaiHang(Model model) {
 		
-//		List<KhuyenMaiInfo> khuyenmai = khuyenMaiDao.loadKM();
+		List<KhuyenMaiInfo> khuyenMai = khuyenMaiDao.loadKM();
 		LoaiHangInfo loaiHangInfo= new LoaiHangInfo();
 		model.addAttribute("loaiHangInfo", loaiHangInfo);
-//		model.addAttribute("khuyenMai", khuyenMai);
+		model.addAttribute("khuyenMai", khuyenMai);
 		return "admin/ThemLoaiHang";
 	}
 	
