@@ -52,7 +52,14 @@
 										<div >
 										<a style="color: #2B2D42;" href="${pageContext.request.contextPath}/dangky" class="text-center">Đăng ký thành viên</a>
 										</div>
-										 
+										 <!-- kiểm tra trung ten dang nhap -->
+										<c:if test="${loginF != null }">
+											<script type="text/javascript">									
+																								
+													alert("Tên đăng nhập hoặc mật khẩu không đúng");								
+												
+											</script>	
+										</c:if>
 									</form>
 									</body>
 
@@ -61,15 +68,7 @@
 						</div> <!-- /Cart -->
 					</li>
 				</c:if>
-				<!-- kiểm tra trung ten dang nhap -->
-				<c:if test="${loginF != null }">
-					<script type="text/javascript">									
-						function myFunction() {
-														
-							alert("Tên đăng nhập hoặc mật khẩu không đúng");								
-						}
-					</script>	
-				</c:if>	
+					
 <c:if test="${checkUser != null }">
 				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-user-o"></i> Logout</a></li>

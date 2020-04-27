@@ -77,47 +77,40 @@
 				</div>
 				<!-- /Order Details -->
 			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
+			<!-- /container -->
+	<c:if test="${thongbao != null }">
+		<script type="text/javascript">									
+			alert("Tên đăng đã tồn tại");																
+		</script>	
+	</c:if>
+
+		<script type="text/javascript">
+			function myFunction() {
+			var tenDN= document.getElementById("tenDN").value;
+			var image= document.getElementById("file-2").value;
+			var matKhau= document.getElementById("matKhau").value;
+			var hoTen= document.getElementById("hoTen").value;
+			var diaChi= document.getElementById("diaChi").value;
+			var sdt= document.getElementById("sdt").value;
+			var email= document.getElementById("email").value;
+			 submitOK = "true";			 
+			if(tenDN=="" || matKhau=="" || hoTen=="" || diaChi=="" || sdt=="" || email==""){
+				 alert("Vui lòng điền đủ thông tin");
+				    submitOK = "false";
+			}
+			
+			if(image==""){
+				 alert("Bạn chưa chọn ảnh. Hãy chọn một ảnh ở bên dưới");
+				    submitOK = "false";
+			}
+			
+			 if (submitOK == "false") {
+				    return false;
+				  }
+			}
+		</script>
 		</div>
 		</form:form>
-		<!--  	<c:if test="${thongbao != null }">
-		<script type="text/javascript">
-		function myFunction() {
-		 	alert("Vui lòng điền đủ thông tin");
-		 	
-		}
-	 </script>
-	 -->
-		</c:if>
-		<c:if test="${thongbao != null }">
-			<script type="text/javascript">
-				function myFunction() {
-					var tenDN = document.getElementById("tenDN").value;
-					var image = document.getElementById("file-2").value;
-					var matKhau = document.getElementById("matKhau").value;
-					var hoTen = document.getElementById("hoTen").value;
-					var diaChi = document.getElementById("diaChi").value;
-					var sdt = document.getElementById("sdt").value;
-					var email = document.getElementById("email").value;
-					submitOK = "true";
-					if (tenDN == "" || matKhau == "" || hoTen == ""
-							|| diaChi == "" || sdt == "" || email == "") {
-						alert("Vui lòng điền đủ thông tin");
-						submitOK = "false";
-					}
-
-					if (image == "") {
-						alert("Bạn chưa chọn ảnh. Hãy chọn một ảnh ở bên dưới");
-						submitOK = "false";
-					}
-
-					if (submitOK == "false") {
-						return false;
-					}
-				}
-			</script>
-		</c:if>
+	
 </body>
 </html>
