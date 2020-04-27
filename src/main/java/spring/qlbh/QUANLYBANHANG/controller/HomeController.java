@@ -1,5 +1,8 @@
 package spring.qlbh.QUANLYBANHANG.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,10 +16,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
@@ -44,7 +52,7 @@ public class HomeController {
 	private DongDonHangDAO dongDonHangDAO;
 	private static Calendar cal;
 
-	// tran chủ
+	// trang chủ
 	@RequestMapping("/")
 	public String indexPage(Model model) {
 		// load hang
@@ -52,141 +60,158 @@ public class HomeController {
 		// load hàng theo loai
 		List<LoaiHangInfo> loaiHang = loaiHangDAO.loadMenu();
 		for (int i = 0; i < loaiHang.size(); i++) {
-			String ten = "Loai"+loaiHang.get(i).getMaLoai();
+			String ten = "Loai" + loaiHang.get(i).getMaLoai();
 			model.addAttribute(ten, hangDAO.loadHangTheoLoai(loaiHang.get(i).getMaLoai()));
 
 		}
-
-		// load hàng theo NSX
-//		List<HangInfo> hangLG = hangDAO.timKiemHangTheoTen("LG");
-//		List<HangInfo> hangSAMSUNG = hangDAO.timKiemHangTheoTen("SAMSUNG");
-//		List<HangInfo> hangIPHONE = hangDAO.timKiemHangTheoTen("IPHONE");
 		model.addAttribute("hang", hang);
 		model.addAttribute("loaiHang", loaiHang);
-//		model.addAttribute("hangLG", hangLG);
-//		model.addAttribute("hangSAMSUNG", hangSAMSUNG);
-//		model.addAttribute("hangIPHONE", hangIPHONE);
 		return "Index";
 	}
+
 	@RequestMapping("/chitiet")
 	public String chiTietHang(Model model, HttpServletRequest request) {
-		int maHang=Integer.parseInt(request.getParameter("id"));
+		int maHang = Integer.parseInt(request.getParameter("id"));
 		HangInfo hang = hangDAO.loadHangTheoId(maHang);
 		model.addAttribute("hang_chitiet", hang);
 		return "ChiTietHang";
 	}
+
 	@RequestMapping("/cart")
 	public String indexCart() {
 		return "cart";
 	}
-	//Mua hàng
-		@RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
-		public String buy(@PathVariable("id") int id, HttpSession session) {
-			if (session.getAttribute("cart") == null) {
-				//Tạo giỏ hàng 
-				List<GioHangInfo> cart = new ArrayList<GioHangInfo>();
-				cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
-				session.setAttribute("cart", cart);
-			} else {
-				List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
-				int index = this.exists(id, cart);
-				if (index == -1) {
-					//thêm hàng không có trong giỏ
-					cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
-				} else {
-					//thay đổi số lượng trong giỏ
-					int quantity = cart.get(index).getSoLuong();
-					if(quantity<10) {
-						quantity+=1;
-					}
-					cart.get(index).setSoLuong(quantity);
-				}
-				session.setAttribute("cart", cart);
-			}
-			return "redirect:/cart";
-		}
-		//giảm số luongj trong giỏ
-		@RequestMapping(value = "/minus/{id}", method = RequestMethod.GET)
-		public String minus(@PathVariable("id") int id, HttpSession session) {
-				List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
-				int index = this.exists(id, cart);
-				if(cart.get(index).getSoLuong()>1) {
-					int quantity = cart.get(index).getSoLuong() - 1;
-					cart.get(index).setSoLuong(quantity);
-				}
-				session.setAttribute("cart", cart);
-			return "redirect:/cart";
-		}
-		//xóa hàng trong giỏ
-		@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-		public String remove(@PathVariable("id") int id, HttpSession session) {
+
+	// Mua hàng
+	@RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
+	public String buy(@PathVariable("id") int id, HttpSession session) {
+		if (session.getAttribute("cart") == null) {
+			// Tạo giỏ hàng
+			List<GioHangInfo> cart = new ArrayList<GioHangInfo>();
+			cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
+			session.setAttribute("cart", cart);
+		} else {
 			List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
 			int index = this.exists(id, cart);
-			cart.remove(index);
+			if (index == -1) {
+				// thêm hàng không có trong giỏ
+				cart.add(new GioHangInfo(hangDAO.loadHangTheoId(id), 1));
+			} else {
+				// thay đổi số lượng trong giỏ
+				int quantity = cart.get(index).getSoLuong();
+				if (quantity < 10) {
+					quantity += 1;
+				}
+				cart.get(index).setSoLuong(quantity);
+			}
 			session.setAttribute("cart", cart);
-			return "redirect:/cart";
 		}
-		//trang thanh toán
-		@RequestMapping("/thanhtoan")
-		public String thanhToan(Model model) {
-			return "ThanhToan";
+		return "redirect:/cart";
+	}
+
+	// giảm số luongj trong giỏ
+	@RequestMapping(value = "/minus/{id}", method = RequestMethod.GET)
+	public String minus(@PathVariable("id") int id, HttpSession session) {
+		List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
+		int index = this.exists(id, cart);
+		if (cart.get(index).getSoLuong() > 1) {
+			int quantity = cart.get(index).getSoLuong() - 1;
+			cart.get(index).setSoLuong(quantity);
 		}
-		//trang tim kiếm
-		@RequestMapping(value = "/timkiem", method = RequestMethod.GET)
-		public String timKiem(Model model,HttpServletRequest request, HttpSession session) {
-			String tukhoa=request.getParameter("tukhoa");
-			List<HangInfo> tkh = hangDAO.timKiemHangTheoTen(tukhoa);
-			model.addAttribute("tkh", tkh);
-			return "TimKiem";
+		session.setAttribute("cart", cart);
+		return "redirect:/cart";
+	}
+
+	// xóa hàng trong giỏ
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+	public String remove(@PathVariable("id") int id, HttpSession session) {
+		List<GioHangInfo> cart = (List<GioHangInfo>) session.getAttribute("cart");
+		int index = this.exists(id, cart);
+		cart.remove(index);
+		session.setAttribute("cart", cart);
+		return "redirect:/cart";
+	}
+
+	// trang thanh toán
+	@RequestMapping("/thanhtoan")
+	public String thanhToan(Model model) {
+		return "ThanhToan";
+	}
+
+	// trang tim kiếm
+	@RequestMapping(value = "/timkiem", method = RequestMethod.GET)
+	public String timKiem(Model model, HttpServletRequest request, HttpSession session) {
+		String tukhoa = request.getParameter("tukhoa");
+		List<HangInfo> tkh = hangDAO.timKiemHangTheoTen(tukhoa);
+		model.addAttribute("tkh", tkh);
+		return "TimKiem";
+	}
+
+	// hóa đơn
+	@RequestMapping(value = "/thanhtoan/hoantat/hoadon")
+	public String hoadon() {
+		return "HoaDon";
+	}
+
+	// trang thanh toán hoàn tất
+	@RequestMapping(value = "/thanhtoan/hoantat", method = RequestMethod.POST)
+	public String hoanTat(Model model, HttpServletRequest request, HttpSession session) {
+		// thêm don hang
+		int maNguoiDung = 1;
+
+		int maDonHang = maRamdom();
+		System.out.println(maDonHang);
+		List<GioHangInfo> gH = (List<GioHangInfo>) session.getAttribute("cart");
+		float tongTien = 0;
+		for (GioHangInfo hg : gH) {
+			tongTien = tongTien + (hg.getSoLuong() * hg.getHang().getDonGia());
 		}
-		//trang thanh toán hoàn tất
-		@RequestMapping(value = "/thanhtoan/hoantat", method = RequestMethod.POST)
-		public String hoanTat(Model model,HttpServletRequest request, HttpSession session) {
-			//thêm don hang
-			int maUser;
-			Random rand = new Random();
-			int maDonHang =rand.nextInt(1000);
-			List<GioHangInfo> gH=(List<GioHangInfo>) session.getAttribute("cart");
-			float tt= 0;
-			for (GioHangInfo hg : gH) {
-				tt=tt+(hg.getSoLuong()*hg.getHang().getDonGia());
-			}
-			if (session.getAttribute("checkUser") == null) {
-				maUser=33;
-			}else {
-//				UserInfo user=(UserInfo)session.getAttribute("checkUser");
-//				maUser=user.getId();
-			}
-//			String ngayDatHang=getToday();
-//			float tongTien=tt;
-//			String tenNguoiNhan=request.getParameter("tennguoinhan");
-//			String email=request.getParameter("email");
-//			String tinh=request.getParameter("tinhthanhpho");
-//			String huyen=request.getParameter("quanhuyen");
-//			String xa=request.getParameter("phuongxa");
-//			String diaChiNhan=request.getParameter("diachinhan")+"-"+xa+"-"+huyen+"-"+tinh;
-//			String sDT=request.getParameter("sdt");
-//			String ghiChu=request.getParameter("ghichu");
-//			int trangThai=4;
-//			int id=maUser;
-//			DonHangInfo donhang=new DonHangInfo(maDonHang,ngayDatHang,tongTien,tenNguoiNhan,email,diaChiNhan,sDT,ghiChu,trangThai,id);
-//			donHangDAO.insertDH(donhang);
-			//thay đổi trạng thái
-//			DonHangInfo dh=donHangDAO.loadDonHangDT(maUser, 4);
-			//thêm dòng đơn hàng
-//			for (GioHangInfo hg1 : gH) {
-//				int maDongDonHang =rand.nextInt(1000);
-//				DongDonHangInfo dongdonhang=new DongDonHangInfo(maDongDonHang,hg1.getSoLuong(),hg1.getHang().getMaHang(),dh.getMaDH());
-//				dongDonHangDAO.insertDH(dongdonhang);
-//				HangInfo hang=hangDAO.loadHangTheoId(hg1.getHang().getMaHang());
-//				HangInfo hangTT=new HangInfo(hang.getMaHang(),hang.getTenHang(),hang.getDonGia(),hang.getImageLink(),hang.getvAT(),hang.getMaLoai(),hang.getNhaSX(),hang.getNgaySX(),hang.gettGBaoHanh(),hang.gettTThem(),hang.getSoLuongHang()-hg1.getSoLuong(),hang.getTrangThaiHang());
-//				hangDAO.uploadHang(hangTT);
-//			}
-//			donHangDAO.updateTrangThaiDH(dh, 0);
-//			session.removeAttribute("cart");
-			return "redirect:/thanhtoan/hoantat/hoadon";
+		if (session.getAttribute("checkUser") != null) {
+			NguoiDungInfo nguoiDung = (NguoiDungInfo) session.getAttribute("checkUser");
+			maNguoiDung = nguoiDung.getMaND();
 		}
-		private int exists(int id, List<GioHangInfo> cart) {
+		String ngayDatHang = getToday();
+		String tenNguoiNhan = request.getParameter("tennguoinhan");
+		String email = request.getParameter("email");
+		String tinh = request.getParameter("tinhthanhpho");
+		String huyen = request.getParameter("quanhuyen");
+		String xa = request.getParameter("phuongxa");
+		String diaChiNhan = request.getParameter("diachinhan") + "-" + xa + "-" + huyen + "-" + tinh;
+		String sDT = request.getParameter("sdt");
+		String ghiChu = request.getParameter("ghichu");
+		int trangThai = 0;
+		DonHangInfo donhang = new DonHangInfo(maDonHang, ngayDatHang, tongTien, tenNguoiNhan, email, diaChiNhan, sDT,
+				ghiChu, trangThai, maNguoiDung);
+
+		donHangDAO.insertDH(donhang);
+		for (GioHangInfo hg1 : gH) {
+			int maDongDonHang = maRamdom();
+			DongDonHangInfo dongdonhang = new DongDonHangInfo(maDongDonHang, hg1.getSoLuong(),
+					hg1.getHang().getMaHang(), maDonHang);
+			dongDonHangDAO.insertDH(dongdonhang);
+			HangInfo hang = hangDAO.loadHangTheoId(hg1.getHang().getMaHang());
+			HangInfo hangTT = new HangInfo(hang.getMaHang(), hang.getTenHang(), hang.getImageLink(),
+					hang.getNgayNhapHang(), hang.getDonGia(), hang.getMaLoai(), hang.getSoLuong() - hg1.getSoLuong(),
+					hang.getDonVi(), hang.getNoiSX(), hang.gettTThem(), hang.getTrangThai());
+			hangDAO.uploadHang(hangTT);
+		}
+		session.removeAttribute("cart");
+		return "redirect:/thanhtoan/hoantat/hoadon";
+	}
+
+	private int maRamdom() {
+		Random rand = new Random();
+
+		return rand.nextInt(1000);
+	}
+
+	private String getToday() {
+		cal = Calendar.getInstance();
+		return cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + " " + cal.get(Calendar.DAY_OF_MONTH)
+				+ "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
+	}
+
+	private int exists(int id, List<GioHangInfo> cart) {
 		for (int i = 0; i < cart.size(); i++) {
 			if (cart.get(i).getHang().getMaHang() == id) {
 				return i;
@@ -194,27 +219,73 @@ public class HomeController {
 		}
 		return -1;
 	}
-		//login
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public String loginPage(Model model, @RequestParam String userName,
-				@RequestParam String passWord, HttpSession session) {
-			String request = "";
-			NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
-			if(us !=null) {
-				String loai=us.getLoai();
-				if(loai.equals("0")) {
-					session.setAttribute("checkUser", us);
-					request = "redirect:/admin/hang";	
-				} else {
-					session.setAttribute("checkUser",us);
-					request = "redirect:/";
+	@RequestMapping("/dangky")
+	public String DangKyPage(Model model) {
+		NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
+		model.addAttribute("nguoiDungInfo", nguoiDungInfo);
+		return "DangKy";
+	}
+	@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
+	public String DangKy(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo) {
+		
+		Random rand = new Random();
+		int maND = rand.nextInt(1000);
+		String tenND = nguoiDungInfo.getTenDN();
+		String matKhau= nguoiDungInfo.getMatKhau();
+		String hoTen = nguoiDungInfo.getHoTen();
+		int sDT =nguoiDungInfo.getsDT();	
+		String diaChi= nguoiDungInfo.getDiaChi();
+		String Email = nguoiDungInfo.getEmail();
+		String loai = "1";
+		CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+		String imageLink = fileDatas.getOriginalFilename();
+		
+		NguoiDungInfo nd = new NguoiDungInfo(maND, tenND, matKhau,hoTen, imageLink, diaChi, sDT,
+				Email, loai);
+		nguoiDungDAO.insertNguoiDung(nd);
+			doUpload(request, nguoiDungInfo);
+		
+		return "redirect:/";
+	}
+	//upload anh
+		private void doUpload(HttpServletRequest request, //
+				NguoiDungInfo nguoiDungInfo) {
+			String uploadRootPath = request.getServletContext().getRealPath("/") + "template/client/img";
+			System.out.println("uploadRootPath=" + uploadRootPath);
+			File uploadRootDir = new File(uploadRootPath);
+			if (!uploadRootDir.exists()) {
+				uploadRootDir.mkdirs();
+			}
+			CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+			List<File> uploadedFiles = new ArrayList<File>();
+			String name = fileDatas.getOriginalFilename();
+			System.out.println("Client File Name = " + name);
+			if (name != null && name.length() > 0) {
+				try {
+					File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+					stream.write(fileDatas.getBytes());
+					stream.close();
+					uploadedFiles.add(serverFile);
+					System.out.println("Write file: " + serverFile);
+				} catch (Exception e) {
+					System.out.println("Error Write file: " + name);
 				}
 			}
-			else {
-				session.setAttribute("loginF","TÃªn Ä‘Äƒng nháº­p vÃ  máº­t kháº©u sai");
-				request="redirect:/";
+
+		}
+		@InitBinder
+		public void initBinder(WebDataBinder dataBinder) {
+			Object target = dataBinder.getTarget();
+			if (target == null) {
+				return;
 			}
-			session.removeAttribute("cart");
-			return request;
+			System.out.println("Target=" + target);
+
+			if (target.getClass() == HangInfo.class) {
+
+				// Ä�Äƒng kÃ½ Ä‘á»ƒ chuyá»ƒn Ä‘á»•i giá»¯a cÃ¡c Ä‘á»‘i tÆ°á»£ng multipart thÃ nh byte[]
+				dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+			}
 		}
 }

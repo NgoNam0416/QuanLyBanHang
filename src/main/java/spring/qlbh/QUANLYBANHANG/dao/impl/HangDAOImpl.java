@@ -87,6 +87,7 @@ public class HangDAOImpl implements HangDAO {
 		hangentity.setMaHang(hangInfo.getMaHang());
 		hangentity.setTenHang(hangInfo.getTenHang());
 		hangentity.setImage(hangInfo.getImageLink());
+		hangentity.setNgayNhapHang(hangInfo.getNgayNhapHang());
 		hangentity.setDonGia(hangInfo.getDonGia());
 		hangentity.setMaLoai(hangInfo.getMaLoai());
 		hangentity.setSoLuong(hangInfo.getSoLuong());

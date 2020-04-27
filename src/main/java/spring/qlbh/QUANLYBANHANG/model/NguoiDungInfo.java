@@ -40,7 +40,7 @@ public class NguoiDungInfo {
 		this.image = image;
 		this.diaChi = diaChi;
 		this.sDT = sDT;
-		Email = email;
+		this.Email = email;
 		this.loai = loai;
 	}
 	
@@ -90,7 +90,7 @@ public class NguoiDungInfo {
 		return Email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.Email = email;
 	}
 	public String getLoai() {
 		return loai;

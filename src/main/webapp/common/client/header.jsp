@@ -25,17 +25,17 @@
 							<div class="cart-dropdown"style="width: 300px; max-height: 190px;overflow-y: visible;margin-bottom: 5px;>
 								<div class="cart-list"    ">
 									<form action="${pageContext.request.contextPath}/login"
-										method="post" name="formdangnhap">
+										method="post" name="formdangnhap" onsubmit="return myFunction()">
 										<h3>Đăng Nhập</h3>
 										<div class="input-group" style="width:250px;">
-											<input type="text" name="userName" class="form-control"
+											<input type="text" name="userName" id="userName" class="form-control"
 												placeholder="Username" required>
 											<div class="input-group-append">
 												
 											</div>
 										</div>
 										<div class="input-group "style="width:250px;padding-top:5px;">
-											<input type="password" name="passWord" class="form-control"
+											<input type="password" name="passWord" id="passWord" class="form-control"
 												placeholder="Password" required>
 											<div class="input-group-append">
 												
@@ -50,10 +50,22 @@
 											<!-- /.col -->
 										</div>
 										<div >
-										<a style="color: #2B2D42;" href="register.html" class="text-center">Đăng ký thành viên</a>
+										<a style="color: #2B2D42;" href="${pageContext.request.contextPath}/dangky" class="text-center">Đăng ký thành viên</a>
 										</div>
 										 
 									</form>
+									<script type="text/javascript">
+									
+			function myFunction() {
+			var userName= document.getElementById("userName").value;
+			var passWord= document.getElementById("passWord").value;
+			var thongbao = "<%=request.getAttribute("thongbao")%>";
+			 submitOK = "true";
+			 if(thongbao!="null"){
+					alert(thongbao);
+				}
+			}
+		</script>
 									</body>
 
 								</div>
@@ -61,6 +73,7 @@
 						</div> <!-- /Cart -->
 					</li>
 				</c:if>
+				
 <c:if test="${checkUser != null }">
 				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-user-o"></i> Logout</a></li>

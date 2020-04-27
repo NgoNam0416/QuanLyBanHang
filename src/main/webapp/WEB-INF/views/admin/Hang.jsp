@@ -8,10 +8,23 @@
 		<div class="content-header">
 			<div >
 				<div class="row mb-2">
-					<div class="col-sm-6">
+					<div class="col-sm-4">
 						<h3 cs>QUẢN LÝ HÀNG</h3>
 					</div>
-					<div class="col-sm-6" style="text-align: right; font-size: 20px;">
+					<div class="col-sm-4">
+					<form class="form-inline ml-3"action="${pageContext.request.contextPath}/admin/hang/timkiemhang" method="get">
+						<div class="input-group input-group-sm4" style="width: 90%">
+							<input class="form-control" type="search" name="tukhoa"
+								placeholder="Tìm kiếm theo tên hàng" aria-label="Search">
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					</div>
+					<div class="col-sm-4" style="text-align: right; font-size: 20px;">
 						<!-- <a href="#" style="font-size: 20px;margin-top: 20px"class="glyphicon glyphicon-plus">Thêm</a>  -->
 						<a href="${pageContext.request.contextPath}/admin/hang/addhang" class="btn btn-outline-success"> <span class="fa fa-plus"></span>
 							Thêm
