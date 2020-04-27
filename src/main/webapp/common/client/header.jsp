@@ -50,23 +50,20 @@
 											<!-- /.col -->
 										</div>
 										<div >
-										<a style="color: #2B2D42;" href="register.html" class="text-center">Đăng ký thành viên</a>
+										<a style="color: #2B2D42;" href="${pageContext.request.contextPath}/dangky" class="text-center">Đăng ký thành viên</a>
 										</div>
 										 
 									</form>
 									<script type="text/javascript">
+									
 			function myFunction() {
 			var userName= document.getElementById("userName").value;
 			var passWord= document.getElementById("passWord").value;
-				
-			 submitOK = "true";			 
-			if(${loginF != null}){
-				 alert("Tên đăng nhập hoặc mật khẩu sai");
-				    submitOK = "false";
-			}else{
-				 submitOK = "true";
-			}
-			
+			var thongbao = "<%=request.getAttribute("thongbao")%>";
+			 submitOK = "true";
+			 if(thongbao!="null"){
+					alert(thongbao);
+				}
 			}
 		</script>
 									</body>
@@ -76,6 +73,7 @@
 						</div> <!-- /Cart -->
 					</li>
 				</c:if>
+				
 <c:if test="${checkUser != null }">
 				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-user-o"></i> Logout</a></li>

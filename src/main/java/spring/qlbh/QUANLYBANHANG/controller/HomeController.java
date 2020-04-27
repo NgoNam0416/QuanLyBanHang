@@ -1,5 +1,8 @@
 package spring.qlbh.QUANLYBANHANG.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,15 +16,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import spring.qlbh.QUANLYBANHANG.dao.DonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.HangDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
+import spring.qlbh.QUANLYBANHANG.dao.NguoiDungDAO;
 import spring.qlbh.QUANLYBANHANG.model.DonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.DongDonHangInfo;
 import spring.qlbh.QUANLYBANHANG.model.GioHangInfo;
@@ -210,28 +219,73 @@ public class HomeController {
 		}
 		return -1;
 	}
-		//login
-		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public String loginPage(Model model, @RequestParam String userName,
-				@RequestParam String passWord, HttpSession session) {
-			
-			String request = "";
-			NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
-			if(us !=null) {
-				String loai=us.getLoai();
-				if(loai.equals("0")) {
-					session.setAttribute("checkUser", us);
-					request = "redirect:/admin/hang";	
-				} else {
-					session.setAttribute("checkUser",us);
-					request = "redirect:/";
-				}
-			}else {
-				session.setAttribute("loginF","Tên đăng nhập sai");
-				request = "redirect:/";
+	@RequestMapping("/dangky")
+	public String DangKyPage(Model model) {
+		NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
+		model.addAttribute("nguoiDungInfo", nguoiDungInfo);
+		return "DangKy";
+	}
+	@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
+	public String DangKy(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo) {
+		
+		Random rand = new Random();
+		int maND = rand.nextInt(1000);
+		String tenND = nguoiDungInfo.getTenDN();
+		String matKhau= nguoiDungInfo.getMatKhau();
+		String hoTen = nguoiDungInfo.getHoTen();
+		int sDT =nguoiDungInfo.getsDT();	
+		String diaChi= nguoiDungInfo.getDiaChi();
+		String Email = nguoiDungInfo.getEmail();
+		String loai = "1";
+		CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+		String imageLink = fileDatas.getOriginalFilename();
+		
+		NguoiDungInfo nd = new NguoiDungInfo(maND, tenND, matKhau,hoTen, imageLink, diaChi, sDT,
+				Email, loai);
+		nguoiDungDAO.insertNguoiDung(nd);
+			doUpload(request, nguoiDungInfo);
+		
+		return "redirect:/";
+	}
+	//upload anh
+		private void doUpload(HttpServletRequest request, //
+				NguoiDungInfo nguoiDungInfo) {
+			String uploadRootPath = request.getServletContext().getRealPath("/") + "template/client/img";
+			System.out.println("uploadRootPath=" + uploadRootPath);
+			File uploadRootDir = new File(uploadRootPath);
+			if (!uploadRootDir.exists()) {
+				uploadRootDir.mkdirs();
 			}
-			
-			session.removeAttribute("cart");
-			return request;
+			CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+			List<File> uploadedFiles = new ArrayList<File>();
+			String name = fileDatas.getOriginalFilename();
+			System.out.println("Client File Name = " + name);
+			if (name != null && name.length() > 0) {
+				try {
+					File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+					stream.write(fileDatas.getBytes());
+					stream.close();
+					uploadedFiles.add(serverFile);
+					System.out.println("Write file: " + serverFile);
+				} catch (Exception e) {
+					System.out.println("Error Write file: " + name);
+				}
+			}
+
+		}
+		@InitBinder
+		public void initBinder(WebDataBinder dataBinder) {
+			Object target = dataBinder.getTarget();
+			if (target == null) {
+				return;
+			}
+			System.out.println("Target=" + target);
+
+			if (target.getClass() == HangInfo.class) {
+
+				// Ä�Äƒng kÃ½ Ä‘á»ƒ chuyá»ƒn Ä‘á»•i giá»¯a cÃ¡c Ä‘á»‘i tÆ°á»£ng multipart thÃ nh byte[]
+				dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+			}
 		}
 }

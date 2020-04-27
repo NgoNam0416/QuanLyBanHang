@@ -50,7 +50,7 @@ public class QuanLyHangController {
 			dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 		}
 	}
-
+//load rang sua hang
 	@RequestMapping("/suahang/{maHang}")
 	public String suaHang(@PathVariable("maHang") int maHang, Model model, HttpServletRequest request,
 			@ModelAttribute("suaHangInfo") HangInfo suaHangInfo) {
@@ -62,7 +62,7 @@ public class QuanLyHangController {
 		return "admin/SuaHang";
 
 	}
-
+// sua hang thanh cong
 	@RequestMapping("/suahang/hoanthanh/{maHang}")
 	public String hoanThanh(@PathVariable("maHang") int maHang, Model model, HttpServletRequest request,
 			@ModelAttribute("suaHangInfo") HangInfo suaHangInfo) {
@@ -94,7 +94,7 @@ public class QuanLyHangController {
 		return "redirect:/admin/hang";
 
 	}
-
+//xoa hang theo ma
 	@RequestMapping("/xoahang")
 	public String deleteHang(Model model, HttpServletRequest request, HttpSession session) {
 		int maHang = Integer.parseInt(request.getParameter("maHang"));
@@ -102,7 +102,7 @@ public class QuanLyHangController {
 		return "redirect:/admin/hang";
 
 	}
-
+// load trang them hang
 	@RequestMapping(value = "/addhang")
 	public String themhang(Model model) {
 		List<LoaiHangInfo> loaiHang = loaiHangDAO.loadMenu();
@@ -111,7 +111,7 @@ public class QuanLyHangController {
 		model.addAttribute("loaiHang", loaiHang);
 		return "admin/addHang";
 	}
-
+//them hang thanh cong
 	@RequestMapping(value = "/addhang/them", method = RequestMethod.POST)
 	public String addHang(Model model, HttpServletRequest request, @ModelAttribute("hangInfo") HangInfo hangInfo) {
 
@@ -137,7 +137,15 @@ public class QuanLyHangController {
 			doUpload(request, hangInfo);
 		return "redirect:/admin/hang";
 	}
-
+	// trang tim kiếm
+		@RequestMapping(value = "/timkiemhang", method = RequestMethod.GET)
+		public String timKiem(Model model, HttpServletRequest request, HttpSession session) {
+			String tukhoa = request.getParameter("tukhoa");
+			List<HangInfo> tkh = hangDAO.timKiemHangTheoTen(tukhoa);
+			model.addAttribute("loadHang", tkh);
+			return "admin/Hang";
+		}
+		//upload anh
 	private void doUpload(HttpServletRequest request, //
 			HangInfo hangInfo) {
 		String uploadRootPath = request.getServletContext().getRealPath("/") + "template/client/img";
