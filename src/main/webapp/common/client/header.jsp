@@ -54,18 +54,6 @@
 										</div>
 										 
 									</form>
-									<script type="text/javascript">
-									
-			function myFunction() {
-			var userName= document.getElementById("userName").value;
-			var passWord= document.getElementById("passWord").value;
-			var thongbao = "<%=request.getAttribute("thongbao")%>";
-			 submitOK = "true";
-			 if(thongbao!="null"){
-					alert(thongbao);
-				}
-			}
-		</script>
 									</body>
 
 								</div>
@@ -73,7 +61,15 @@
 						</div> <!-- /Cart -->
 					</li>
 				</c:if>
-				
+				<!-- kiểm tra trung ten dang nhap -->
+				<c:if test="${loginF != null }">
+					<script type="text/javascript">									
+						function myFunction() {
+														
+							alert("Tên đăng nhập hoặc mật khẩu không đúng");								
+						}
+					</script>	
+				</c:if>	
 <c:if test="${checkUser != null }">
 				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-user-o"></i> Logout</a></li>

@@ -58,17 +58,12 @@ public class QuanLyHangController {
 		model.addAttribute("loai", loai);
 		HangInfo hang = hangDAO.loadHangTheoId(maHang);
 		model.addAttribute("hangtheoid", hang);
-
 		return "admin/SuaHang";
-
 	}
 // sua hang thanh cong
 	@RequestMapping("/suahang/hoanthanh/{maHang}")
 	public String hoanThanh(@PathVariable("maHang") int maHang, Model model, HttpServletRequest request,
 			@ModelAttribute("suaHangInfo") HangInfo suaHangInfo) {
-
-		boolean kt = false;
-		
 		String tenHang = suaHangInfo.getTenHang();
 //		String imageLike = suaHangInfo.getImageLink();
 		String ngayNhapHang= suaHangInfo.getNgayNhapHang();
@@ -80,19 +75,14 @@ public class QuanLyHangController {
 		String tTThem = suaHangInfo.gettTThem();
 		String trangThai = suaHangInfo.getTrangThai();		
 		CommonsMultipartFile fileDatas = suaHangInfo.getAnh();
-		// TÃªn file gá»‘c táº¡i Client.
 		String imageLink = fileDatas.getOriginalFilename();
 		HangInfo suahang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
-				soLuong, donVi, noiSX, tTThem, trangThai);
-		
+				soLuong, donVi, noiSX, tTThem, trangThai);		
 		// call goi ham sua
 		hangDAO.uploadHang(suahang);
 		// call up file.
 		doUpload(request, suaHangInfo);
-		kt = true;
-
 		return "redirect:/admin/hang";
-
 	}
 //xoa hang theo ma
 	@RequestMapping("/xoahang")
@@ -100,7 +90,6 @@ public class QuanLyHangController {
 		int maHang = Integer.parseInt(request.getParameter("maHang"));
 		hangDAO.xoaHang(maHang);
 		return "redirect:/admin/hang";
-
 	}
 // load trang them hang
 	@RequestMapping(value = "/addhang")
@@ -114,10 +103,7 @@ public class QuanLyHangController {
 //them hang thanh cong
 	@RequestMapping(value = "/addhang/them", method = RequestMethod.POST)
 	public String addHang(Model model, HttpServletRequest request, @ModelAttribute("hangInfo") HangInfo hangInfo) {
-
-		String kt ;
 		Random rand = new Random();
-
 		int maHang = rand.nextInt(1000);
 		String tenHang = hangInfo.getTenHang();
 		String ngayNhapHang= hangInfo.getNgayNhapHang();
@@ -129,9 +115,8 @@ public class QuanLyHangController {
 		String tTThem = hangInfo.gettTThem();
 		String trangThai = hangInfo.getTrangThai();
 		CommonsMultipartFile fileDatas = hangInfo.getAnh();
-		String imageLink = fileDatas.getOriginalFilename();
-		
-					HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
+		String imageLink = fileDatas.getOriginalFilename();		
+		HangInfo hang = new HangInfo(maHang, tenHang, imageLink, ngayNhapHang, donGia, maLoai,
 					soLuong, donVi, noiSX, tTThem, trangThai);
 			hangDAO.insertHang(hang);
 			doUpload(request, hangInfo);

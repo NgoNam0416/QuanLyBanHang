@@ -70,7 +70,16 @@
 			</div>
 			<!-- /container -->
 		</div>
-	</form:form>
+	<!--  	<c:if test="${thongbao != null }">
+		<script type="text/javascript">
+		function myFunction() {
+		 	alert("Vui lòng điền đủ thông tin");
+		 	
+		}
+	 </script>
+	 -->
+	</c:if>
+	<c:if test="${thongbao != null }">
 			<script type="text/javascript">
 			function myFunction() {
 			var tenDN= document.getElementById("tenDN").value;
@@ -90,11 +99,12 @@
 				 alert("Bạn chưa chọn ảnh. Hãy chọn một ảnh ở bên dưới");
 				    submitOK = "false";
 			}
+			
 			 if (submitOK == "false") {
 				    return false;
 				  }
 			}
 		</script>
-	
+	</c:if>
 </body>
 </html>

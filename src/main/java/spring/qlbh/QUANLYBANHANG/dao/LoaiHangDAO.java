@@ -5,7 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import spring.qlbh.QUANLYBANHANG.entity.LoaiHang;
-import spring.qlbh.QUANLYBANHANG.model.HangInfo;
+
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
 
 @Transactional

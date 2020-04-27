@@ -64,5 +64,17 @@ public class NguoiDungDAOImpl implements NguoiDungDAO {
 		nguoiDungEntity.setLoai(userInfo.getLoai());
 		session.persist(nguoiDungEntity);
 	}
+	
+	public NguoiDungInfo checkTrungTenDN(String tenDN) {
+		Session se = this.sessionFactory.getCurrentSession();
 
+		String sql = " Select new " + NguoiDungInfo.class.getName()
+				+ "(u.maND, u.tenDN, u.matKhau, u.hoTen, u.image, u.diaChi, u.sDT,u.email, u.loai)" + " from "
+				+ NguoiDung.class.getName() + " u "+" where TenDN =: tenDN ";
+
+		Query query = se.createQuery(sql);
+		query.setParameter("tenDN", tenDN);
+		
+		return (NguoiDungInfo) query.uniqueResult();
+	}
 }

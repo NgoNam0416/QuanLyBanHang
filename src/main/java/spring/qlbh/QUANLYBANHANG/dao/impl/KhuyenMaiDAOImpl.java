@@ -2,20 +2,16 @@ package spring.qlbh.QUANLYBANHANG.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import spring.qlbh.QUANLYBANHANG.dao.KhuyenMaiDAO;
 import spring.qlbh.QUANLYBANHANG.entity.KhuyenMai;
 import spring.qlbh.QUANLYBANHANG.model.KhuyenMaiInfo;
 
 public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
-
 	@Autowired
 	private SessionFactory sessionfactory;
 	@Override
@@ -27,5 +23,5 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
-	
+
 }

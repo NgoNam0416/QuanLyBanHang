@@ -219,34 +219,61 @@ public class HomeController {
 		}
 		return -1;
 	}
-	@RequestMapping("/dangky")
-	public String DangKyPage(Model model) {
-		NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
-		model.addAttribute("nguoiDungInfo", nguoiDungInfo);
-		return "DangKy";
-	}
-	@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
-	public String DangKy(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo) {
-		
-		Random rand = new Random();
-		int maND = rand.nextInt(1000);
-		String tenND = nguoiDungInfo.getTenDN();
-		String matKhau= nguoiDungInfo.getMatKhau();
-		String hoTen = nguoiDungInfo.getHoTen();
-		int sDT =nguoiDungInfo.getsDT();	
-		String diaChi= nguoiDungInfo.getDiaChi();
-		String Email = nguoiDungInfo.getEmail();
-		String loai = "1";
-		CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
-		String imageLink = fileDatas.getOriginalFilename();
-		
-		NguoiDungInfo nd = new NguoiDungInfo(maND, tenND, matKhau,hoTen, imageLink, diaChi, sDT,
-				Email, loai);
-		nguoiDungDAO.insertNguoiDung(nd);
-			doUpload(request, nguoiDungInfo);
-		
-		return "redirect:/";
-	}
+	//login
+			@RequestMapping(value = "/login", method = RequestMethod.POST)
+			public String loginPage(Model model, @RequestParam String userName,
+					@RequestParam String passWord, HttpSession session) {
+				String request = "";
+				NguoiDungInfo us= nguoiDungDAO.checkLogin(userName,passWord);
+				if(us !=null) {
+					String loai=us.getLoai();
+					if(loai.equals("0")) {
+						session.setAttribute("checkUser", us);
+						request = "redirect:/admin/hang";	
+					} else {
+						session.setAttribute("checkUser",us);
+						request = "redirect:/";
+					}
+				}
+				else {
+					session.setAttribute("loginF","ten sai");
+					request="redirect:/";
+				}
+				session.removeAttribute("cart");
+				return request;
+			}
+		@RequestMapping("/dangky")
+		public String DangKyPage(Model model) {
+			NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
+			model.addAttribute("nguoiDungInfo", nguoiDungInfo);
+			return "DangKy";
+		}
+		@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
+		public String DangKy(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo,
+				HttpSession session) {
+			String requestpage = "";
+			Random rand = new Random();
+			int maND = rand.nextInt(1000);
+			String tenDN = nguoiDungInfo.getTenDN();
+			String matKhau= nguoiDungInfo.getMatKhau();
+			String hoTen = nguoiDungInfo.getHoTen();
+			int sDT =nguoiDungInfo.getsDT();	
+			String diaChi= nguoiDungInfo.getDiaChi();
+			String Email = nguoiDungInfo.getEmail();
+			String loai = "1";
+			CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+			String imageLink = fileDatas.getOriginalFilename();		
+			NguoiDungInfo nd = new NguoiDungInfo(maND, tenDN, matKhau,hoTen, imageLink, diaChi, sDT,
+					Email, loai);
+			if(nguoiDungDAO.checkTrungTenDN(tenDN)==null) {
+			nguoiDungDAO.insertNguoiDung(nd);
+				doUpload(request, nguoiDungInfo);
+			}else {
+				request.setAttribute("thongbao", "Mã Trùng");
+				requestpage = "redirect:/dangky";
+			}
+			return "redirect:/";
+		}
 	//upload anh
 		private void doUpload(HttpServletRequest request, //
 				NguoiDungInfo nguoiDungInfo) {
