@@ -135,25 +135,25 @@
 									</c:if>
 									<c:forEach var="item" items="${sessionScope.cart }">
 										<c:set var="total"
-											value="${total + item.hang.donGia * item.soLuong }"></c:set>
+											value="${total + (item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100) * item.soLuong }"></c:set>
 										<div class="product-widget">
 											<div class="product-img">
 												<img
-													src="${pageContext.request.contextPath}/template/client/img/${item.hang.imageLink }"
+													src="${pageContext.request.contextPath}/template/client/img/${item.hangKM.imageLink }"
 													alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-name">
-													<a href="#">${item.hang.tenHang }</a>
+													<a href="#">${item.hangKM.tenHang }</a>
 												</h3>
 												<h4 class="product-price">
 													<span class="qty">${item.soLuong }x</span>
-													<fmt:formatNumber type="currency"
-														value="${item.hang.donGia }" />
+													<fmt:formatNumber type="number"
+														value="${item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100 }" />
 												</h4>
 											</div>
 											<a
-												href="${pageContext.request.contextPath}/remove/${item.hang.maHang }"
+												href="${pageContext.request.contextPath}/remove/${item.hangKM.maHang }"
 												onclick="return confirm('Bạn có muốn xóa khỏi giỏ hàng?')"><button
 													class="delete">
 													<i class="fa fa-close"></i>
@@ -168,7 +168,7 @@
 									<small>${sl } mặt hàng</small>
 									<h5>
 										TỔNG TIỀN:
-										<fmt:formatNumber type="currency" value="${total }" />
+										<fmt:formatNumber type="number" value="${total }" />
 									</h5>
 								</div>
 								<div class="cart-btns">

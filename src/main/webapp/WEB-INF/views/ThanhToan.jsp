@@ -66,10 +66,10 @@
 							<div class="order-products">
 							<c:forEach var="item" items="${sessionScope.cart }">
 										<c:set var="total"
-											value="${total + item.hang.donGia * item.soLuong }"></c:set>
+											value="${total + (item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100) * item.soLuong }"></c:set>
 								<div class="order-col">
-									<div>${item.soLuong }x ${item.hang.tenHang }</div>
-									<div><fmt:formatNumber type="currency" value="${item.hang.donGia }" /></div>
+									<div>${item.soLuong }x ${item.hangKM.tenHang }</div>
+									<div><fmt:formatNumber type="number" value="${item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100 }" /></div>
 								</div>
 								</c:forEach>
 							</div>

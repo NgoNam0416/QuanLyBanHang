@@ -47,7 +47,8 @@
 															src="${pageContext.request.contextPath}/template/client/img/${loai1.imageLink }"
 															alt="">
 														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+														<span class="sale"></span>
+															<span class="sale">-${loai1.phanTram }%</span> <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -56,8 +57,9 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${loai1.maHang}">${loai1.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency"
-																value="${loai1.donGia }" />
+															<fmt:formatNumber type="number"
+                                                                value="${loai1.donGia-loai1.donGia*loai1.phanTram/100 }" /> VND
+                                                                <del class="product-old-price">${loai1.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -113,7 +115,7 @@
 															src="${pageContext.request.contextPath}/template/client/img/${loai2.imageLink }"
 															alt="">
 														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+															<span class="sale">-${loai2.phanTram }%</span> <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -122,8 +124,9 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${loai2.maHang}">${loai2.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency"
-																value="${loai2.donGia }" />
+															<fmt:formatNumber type="number"
+                                                                value="${loai2.donGia-loai2.donGia*loai2.phanTram/100 }" /> VND
+                                                                <del class="product-old-price">${loai2.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -179,7 +182,7 @@
 															src="${pageContext.request.contextPath}/template/client/img/${loai3.imageLink }"
 															alt="">
 														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+															<span class="sale">-${loai3.phanTram }%</span> <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -188,8 +191,9 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${loai3.maHang}">${loai3.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency"
-																value="${loai3.donGia }" />
+															<fmt:formatNumber type="number"
+                                                                value="${loai3.donGia-loai3.donGia*loai3.phanTram/100 }" /> VND
+                                                                <del class="product-old-price">${loai3.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -244,8 +248,8 @@
 														<img
 															src="${pageContext.request.contextPath}/template/client/img/${loai4.imageLink }"
 															alt="">
-														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+														<div class="product-label">						
+															<span class="sale">-${loai4.phanTram }%</span> <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -254,8 +258,9 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${loai4.maHang}">${loai4.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency"
-																value="${loai4.donGia }" />
+															<fmt:formatNumber type="number"
+                                                                value="${loai4.donGia-loai4.donGia*loai4.phanTram/100 }" /> VND
+                                                                <del class="product-old-price">${loai4.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -311,7 +316,7 @@
 															src="${pageContext.request.contextPath}/template/client/img/${loai5.imageLink }"
 															alt="">
 														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+															<span class="sale">-${loai5.phanTram }%</span> <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -320,8 +325,9 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${loai5.maHang}">${loai5.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency"
-																value="${loai5.donGia }" />
+															<fmt:formatNumber type="number"
+																value="${loai5.donGia-loai5.donGia*loai5.phanTram/100 }" /> VND
+																<del class="product-old-price">${loai5.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -379,7 +385,8 @@
 															src="${pageContext.request.contextPath}/template/client/img/${h.imageLink }"
 															alt="">
 														<div class="product-label">
-															<span class="sale"></span> <span class="new"></span>
+														<span class="sale">-${h.phanTram }%</span>
+														 <span class="new"></span>
 														</div>
 													</div>
 													<div class="product-body">
@@ -388,7 +395,8 @@
 																href="${pageContext.request.contextPath}/chitiet?id=${h.maHang}">${h.tenHang }</a>
 														</h3>
 														<h4 class="product-price">
-															<fmt:formatNumber type="currency" value="${h.donGia }" />
+															<fmt:formatNumber type="number" value="${h.donGia-h.donGia*h.phanTram/100 }" /> VND
+															<del class="product-old-price">${h.donGia }</del>
 														</h4>
 														<div class="product-rating">
 															<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i

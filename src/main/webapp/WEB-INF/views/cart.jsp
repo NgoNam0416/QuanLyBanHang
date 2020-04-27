@@ -60,6 +60,7 @@
 									<th scope="col">Sản Phẩm</th>
 									<th scope="col">Giá</th>
 									<th scope="col">Số Lượng</th>
+									<th scope="col">Đơn Vị</th>
 									<th scope="col">Tổng Giá</th>
 									<th></th>
 								</tr>
@@ -73,42 +74,47 @@
 												<div class="col-md-6">
 													<div>
 														<img style="height: 150px;"
-															src="${pageContext.request.contextPath}/template/client/img/${item.hang.imageLink }">
+															src="${pageContext.request.contextPath}/template/client/img/${item.hangKM.imageLink }">
 													</div>
 												</div>
 												<div class="col-md-6"
 													style="padding-top: 60px; padding-bottom: 30px; vertical-align: middle; align-self: center;">
-													${item.hang.tenHang }</div>
+													${item.hangKM.tenHang }</div>
 										</td>
 
-										<td style="padding-top: 70px;">
+										<td style="padding-top: 80px;">
 											<h5 id="" data-id="">
-												<fmt:formatNumber type="currency"
-													value="${item.hang.donGia }" />
+												<fmt:formatNumber type="number"
+													value="${item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100 }" />
 											</h5>
 										</td>
-										<td style="padding-top: 50px;">
+										<td style="padding-top: 70px;">
 											<div class="qty-label">
 												<div class="input-number">
 													<input style="width: 80px;" type="number"
 														value="${item.soLuong }" readonly> <a
-														href="${pageContext.request.contextPath}/buy/${item.hang.maHang }">
+														href="${pageContext.request.contextPath}/buy/${item.hangKM.maHang }">
 														<span class="qty-up">+</span>
 													</a> <a
-														href="${pageContext.request.contextPath}/minus/${item.hang.maHang }">
+														href="${pageContext.request.contextPath}/minus/${item.hangKM.maHang }">
 														<span class="qty-down">-</span>
 													</a>
 												</div>
 											</div>
 										</td>
-										<td style="padding-top: 70px;">
+										<td style="padding-top: 80px;">
+                                            <h5 id="tt_">
+                                                ${item.hangKM.donVi }
+                                            </h5>
+                                        </td>
+										<td style="padding-top: 80px;">
 											<h5 id="tt_">
-												<fmt:formatNumber type="currency"
-													value="${item.hang.donGia*item.soLuong }" />
+												<fmt:formatNumber type="number"
+													value="${(item.hangKM.donGia-item.hangKM.donGia*item.hangKM.phanTram/100)*item.soLuong }" />
 											</h5>
 										</td>
-										<td style="padding-top: 53px;"><span><a
-												href="${pageContext.request.contextPath}/remove/${item.hang.maHang }"
+										<td style="padding-top: 80px;"><span><a
+												href="${pageContext.request.contextPath}/remove/${item.hangKM.maHang }"
 												onclick="return confirm('Bạn có muốn xóa khỏi giỏ hàng?')"><button
 														class="delete_product" type="button" id="delete_product"
 														data-id="" value="">
