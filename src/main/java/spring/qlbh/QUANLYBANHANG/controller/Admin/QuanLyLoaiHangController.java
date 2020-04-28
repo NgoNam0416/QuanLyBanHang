@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import spring.qlbh.QUANLYBANHANG.dao.KhuyenMaiDAO;
 import spring.qlbh.QUANLYBANHANG.dao.LoaiHangDAO;
-import spring.qlbh.QUANLYBANHANG.model.HangInfo;
 import spring.qlbh.QUANLYBANHANG.model.KhuyenMaiInfo;
 import spring.qlbh.QUANLYBANHANG.model.LoaiHangInfo;
+
+
+
+
 @Transactional
 @Controller(value = "QuanLyLoaiHangController")
 @RequestMapping(value = "/admin/loaihang")
@@ -48,12 +50,12 @@ public class QuanLyLoaiHangController {
 	public String addHang(Model model, HttpServletRequest request, @ModelAttribute("themLoaiInfo") LoaiHangInfo themLoaiInfo) {
 		Random rand = new Random();
 		int maLoai = rand.nextInt(1000);
-		String tenLoai = "Lương thực";
-		int maKM= 1;
+		String tenLoai =themLoaiInfo.getTenLoai();
+		int maKM= themLoaiInfo.getMaKM();
 		System.out.println(tenLoai);
 		LoaiHangInfo loai = new LoaiHangInfo(maLoai,tenLoai, maKM);
 		loaiHangDAO.themLoaiHang(loai);
-			
+		System.out.println();
 		return "redirect:/admin/loaihang/show";
 	}
 	@RequestMapping("/xoaloai")
