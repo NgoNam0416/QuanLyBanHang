@@ -31,20 +31,20 @@ public class DonHangDAOImpl implements DonHangDAO{
 
 		session.persist(donHangEntity);
 	}
-	public void updateTrangThaiDH(DonHangInfo donhang,int trangThai) {
-		Session session = sessionfactory.getCurrentSession();
-		DonHang donHangEntity = new DonHang();
-		donHangEntity.setMaDH(donhang.getMaDH());
-		donHangEntity.setNgayDatHang(donhang.getNgayDatHang());
-		donHangEntity.setTongTien(donhang.getTongTien());
-		donHangEntity.setTenNguoiNhan(donhang.getTenNguoiNhan());
-		donHangEntity.setEmail(donhang.getEmail());
-		donHangEntity.setDiaChiNhanHang(donhang.getDiaChiNhanHang());
-		donHangEntity.setsDT(donhang.getsDT());
-		donHangEntity.setGhiChu(donhang.getGhiChu());
-		donHangEntity.setTrangThai(trangThai);
-		donHangEntity.setMaND(donhang.getMaND());
-		session.update(donHangEntity);
+	public void updateTrangThaiDH(int maDH,int trangThai) {
+		Session session = sessionfactory.openSession();
+		try {
+			session.beginTransaction();
+			String sql = " UPDATE " + DonHang.class.getName() + " dh "
+					+ "SET dh.trangThai=: trangThai where dh.maDH=: maDH  ";
+			session.createQuery(sql).setInteger("trangThai", trangThai).setInteger("maDH", maDH).executeUpdate();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 	}
 	@Override
 	public DonHangInfo loadDonHangDT(int id,int trangThai) {

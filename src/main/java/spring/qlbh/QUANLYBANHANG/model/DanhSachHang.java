@@ -8,8 +8,7 @@ public class DanhSachHang {
 	private int donGia;
 	private String imageLink;
 	private int soLuong;
-	private int phanTram; 
-	
+	private int phanTram;
 	public DanhSachHang(int maHang, String tenHang, int donGia, String imageLink, int soLuong, int phanTram) {
 		super();
 		this.maHang = maHang;
@@ -59,5 +58,6 @@ public class DanhSachHang {
 	public void setPhanTram(int phanTram) {
 		this.phanTram = phanTram;
 	}
+
 	
 }

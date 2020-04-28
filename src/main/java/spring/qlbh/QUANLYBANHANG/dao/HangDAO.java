@@ -23,9 +23,11 @@ public interface HangDAO {
 	public void suaHang(int maHang);
 
 	public List<HangInfo> timKiemHangTheoTen(String tenHang);
-	public List<HangInfo> timKiemHangTheoNXS(String tenNSX);
+	public List<HangKhuyenMaiInfo> timKiemHangKMTheoTen(String tenHang);
+	public List<HangKhuyenMaiInfo> timKiemHangTheoNXS(String tenNSX);
 	public List<HangKhuyenMaiInfo> loadHangKM();
 	public HangKhuyenMaiInfo loadHangKMTheoId(int maHang);
+	public void uploadSLHang(int maHang, int soLuong);
 
 	
 }

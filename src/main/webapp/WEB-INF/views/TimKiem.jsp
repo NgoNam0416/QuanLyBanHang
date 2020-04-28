@@ -24,7 +24,7 @@
 												src="${pageContext.request.contextPath}/template/client/img/${tkh.imageLink }"
 												alt="">
 											<div class="product-label">
-												<span class="sale"></span> <span class="new"></span>
+												<span class="sale">-${tkh.phanTram }%</span> <span class="new"></span>
 											</div>
 										</div>
 										<div class="product-body">
@@ -33,7 +33,10 @@
 													href="${pageContext.request.contextPath}/chitiet?id=${tkh.maHang}">${tkh.tenHang }</a>
 											</h3>
 											<h4 class="product-price">
-												<fmt:formatNumber type="currency" value="${tkh.donGia }" />
+												<fmt:formatNumber type="number"
+													value="${tkh.donGia-tkh.donGia*tkh.phanTram/100 }" />
+												VND
+												<del class="product-old-price">${tkh.donGia }</del>
 											</h4>
 											<div class="product-rating">
 												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i

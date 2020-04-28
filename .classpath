@@ -30,7 +30,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/NgoNam/.m2/repository/org/hibernate/hibernate-core/5.4.1.Final/hibernate-core-5.4.1.Final.jar" sourcepath="C:/Users/NgoNam/.m2/repository/org/hibernate/hibernate-core/5.4.1.Final/hibernate-core-5.4.1.Final-sources.jar">
+=======
+	<classpathentry kind="lib" path="C:/Users/THI/.m2/repository/org/hibernate/hibernate-core/5.4.1.Final/hibernate-core-5.4.1.Final.jar" sourcepath="C:/Users/NgoNam/.m2/repository/org/hibernate/hibernate-core/5.4.1.Final/hibernate-core-5.4.1.Final-sources.jar">
+>>>>>>> 1cc48fd4dc6f5d61621342dfbdd744ca67b2fbe7
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.archivename" value="hibernate-core-5.4.1.Final.jar"/>

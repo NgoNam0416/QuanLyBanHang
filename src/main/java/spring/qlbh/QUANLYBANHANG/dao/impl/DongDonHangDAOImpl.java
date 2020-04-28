@@ -11,6 +11,8 @@ import spring.qlbh.QUANLYBANHANG.dao.DongDonHangDAO;
 import spring.qlbh.QUANLYBANHANG.entity.DonHang;
 import spring.qlbh.QUANLYBANHANG.entity.DongDonHang;
 import spring.qlbh.QUANLYBANHANG.entity.Hang;
+import spring.qlbh.QUANLYBANHANG.entity.KhuyenMai;
+import spring.qlbh.QUANLYBANHANG.entity.LoaiHang;
 import spring.qlbh.QUANLYBANHANG.model.DanhSachHang;
 
 import spring.qlbh.QUANLYBANHANG.model.DongDonHangInfo;
@@ -35,10 +37,14 @@ public class DongDonHangDAOImpl implements DongDonHangDAO{
 	public List<DanhSachHang> XemDonHang(int maDH) {
 		Session session = sessionfactory.getCurrentSession();
 		String sql = " select new  " + DanhSachHang.class.getName()
-				+ " (h.maHang,h.tenHang,h.donGia,h.image, ddh.soLuong) " + " from " 
+				+ " (h.maHang,h.tenHang,h.donGia,h.image, ddh.soLuong,km.phanTram) " + " from " 
 				+ DongDonHang.class.getName()
-				+ " ddh, " + Hang.class.getName() + " h "
-				+ " where ddh.maHang=h.maHang and ddh.maDH=:maDH";
+				+ " ddh "+ "INNER JOIN " + Hang.class.getName() + " h "
+				+"ON h.maHang=ddh.maHang LEFT JOIN "
+				+ LoaiHang.class.getName() + " lh "
+				+ "ON h.maLoai=lh.maLoai LEFT JOIN " + KhuyenMai.class.getName() + " km " 
+				+ "ON lh.maKM=km.maKM"
+				+ " where ddh.maDH=: maDH";
 		Query query = session.createQuery(sql);
 		query.setParameter("maDH", maDH);
 		return query.list();
