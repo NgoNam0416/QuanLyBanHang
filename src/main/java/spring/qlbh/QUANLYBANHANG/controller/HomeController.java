@@ -264,6 +264,7 @@ public class HomeController {
 			
 			return "DangKy";
 		}
+		//xu ly dang ky
 		@RequestMapping(value ="/dangky/thanhcong", method = RequestMethod.POST)
 		public String DangKy(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo,
 				HttpSession session) {
@@ -299,6 +300,57 @@ public class HomeController {
 			}
 			return requestpage;
 		}
+		//load trang sua thông tin nguoi dung
+		@RequestMapping("/suathongtin")
+		public String suaHang( Model model, HttpServletRequest request,
+				HttpSession session) {
+			NguoiDungInfo nguoiDungInfo=new NguoiDungInfo();
+			model.addAttribute("nguoiDungInfo", nguoiDungInfo);
+			Object thongbao = session.getAttribute("thongbao");
+			session.removeAttribute("thongbao"); 
+			if(thongbao!=null) {
+				request.setAttribute("thongbao", thongbao);				
+			}
+//			NguoiDungInfo nd=nguoiDungDAO.checkTrungTenDN(tenDN);
+//			model.addAttribute("tTNguoiDung", nd);
+
+			return "SuaThongTin";
+		}
+//		//xy ly sua thong tin nguoi dung
+//		@RequestMapping(value ="/suathongtin/suathanhcong", method = RequestMethod.POST)
+//		public String SuaTT(Model model, HttpServletRequest request, @ModelAttribute("nguoiDungInfo") NguoiDungInfo nguoiDungInfo,
+//				HttpSession session) {
+//			String requestpage = "";
+//			
+//			String tenDN = nguoiDungInfo.getTenDN();
+//			String matKhau= nguoiDungInfo.getMatKhau();
+//			String hoTen = nguoiDungInfo.getHoTen();
+//			int sDT =nguoiDungInfo.getsDT();	
+//			String diaChi= nguoiDungInfo.getDiaChi();
+//			String Email = nguoiDungInfo.getEmail();
+//			String loai = "1";
+//			CommonsMultipartFile fileDatas = nguoiDungInfo.getAnhuser();
+//			String imageLink = fileDatas.getOriginalFilename();		
+//			NguoiDungInfo nd = new NguoiDungInfo(maND, tenDN, matKhau,hoTen, imageLink, diaChi, sDT,
+//					Email, loai);
+//			if(nguoiDungDAO.checkTrungTenDN(tenDN)==null) {
+//			nguoiDungDAO.insertNguoiDung(nd);
+//			doUpload(request, nguoiDungInfo);
+//			NguoiDungInfo us= nguoiDungDAO.checkLogin(tenDN,matKhau);
+//			if(us !=null) {
+//				String loaind=us.getLoai();
+//				if(loaind.equals("1")) {
+//					session.setAttribute("checkUser", us);
+//					requestpage = "redirect:/";
+//				}
+//			}
+//			requestpage="redirect:/";
+//			}else {
+//				session.setAttribute("thongbao", "Mã Trùng");
+//				requestpage = "redirect:/dangky";
+//			}
+//			return requestpage;
+//		}
 	//upload anh
 		private void doUpload(HttpServletRequest request, //
 				NguoiDungInfo nguoiDungInfo) {

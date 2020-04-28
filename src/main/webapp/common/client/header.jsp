@@ -70,7 +70,7 @@
 				</c:if>
 					
 <c:if test="${checkUser != null }">
-				<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+				<li><a href="${pageContext.request.contextPath}/suathongtin?tenDN=${checkUser.tenDN}"><i class="fa fa-user-o"></i>${checkUser.hoTen}</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-user-o"></i> Logout</a></li>
 				</c:if>
 			</ul>
