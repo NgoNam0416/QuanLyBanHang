@@ -28,6 +28,15 @@ public class LoaiHangDAOImpl implements LoaiHangDAO {
 		return query.list();
 	}
 	@Override
+	public List<LoaiHangInfo> loadLoaiID(int maLoai) {
+		Session session = sessionfactory.getCurrentSession();
+		String sql = " select new  " + LoaiHangInfo.class.getName()
+					+" ( lh.maLoai, lh.tenLoai,lh.maKM) " // cÃ¡c trÆ°á»�ng trong Ä‘á»‘i tÆ°á»£ng LoaiHangInfo
+					+" from " + LoaiHang.class.getName() + " lh "+ " where h.maLoai=: maLoai  "; // select bÃ ng Hibernate thÃ¬ nÃ³ tráº£ vá»� 1 Ä‘á»‘i tÆ°á»£ng
+		Query query = session.createQuery(sql);
+		return query.list();
+	} 
+	@Override
 	public void themLoaiHang(LoaiHangInfo loaiHangInfo) {
 		Session session = sessionfactory.getCurrentSession();
 		LoaiHang loaientity = new LoaiHang();
@@ -35,10 +44,10 @@ public class LoaiHangDAOImpl implements LoaiHangDAO {
 		loaientity.setTenLoai(loaiHangInfo.getTenLoai());
 		loaientity.setMaKM(loaiHangInfo.getMaKM());
 		
-		session.update(loaientity);
+		session.persist(loaientity);
 
 	}
-
+	
 	@Override 
 	public void xoaLoai(int maLoai) {
 		LoaiHang loai = this.findLoaiHang(maLoai);
@@ -53,6 +62,18 @@ public class LoaiHangDAOImpl implements LoaiHangDAO {
 		crit.add(Restrictions.eq("maLoai", maLoai));
 		return (LoaiHang) crit.uniqueResult();
 	}
+	@Override
+	public void suaLoai(LoaiHangInfo suaLoai) {
+		Session session = sessionfactory.getCurrentSession();
+		LoaiHang loaiIntity= new LoaiHang();
+		loaiIntity.setMaLoai(suaLoai.getMaLoai());
+		loaiIntity.setTenLoai(suaLoai.getTenLoai());
+		loaiIntity.setMaKM(suaLoai.getMaKM());
+		
+		session.update(loaiIntity);
+		
+	}
+	
 
 	
 }
