@@ -29,6 +29,7 @@
 							<div class="form-group col-md-10">
 								<label>Tên Đăng Nhập</label>
 								<form:input class="input" type="text" path="tenDN" id="tenDN"
+								 value="${checkUser.tenDN}" readonly="true"
 									/>
 							</div>
 							<div class="form-group col-md-10">
@@ -37,24 +38,29 @@
 									id="matKhau" placeholder="Mật Khẩu" />
 							</div>
 							<div class="form-group col-md-10">
+								<label>Nhập Lại Mật Khẩu</label>
+								<form:input class="input" type="password" path=""
+									id="nhapLaiMK" placeholder="Mật Khẩu" />
+							</div>
+							<div class="form-group col-md-10">
 								<label>Họ Và Tên</label>
 								<form:input class="input" type="text" path="hoTen" id="hoTen"
-									placeholder="Họ Và Tên " />
+									placeholder="Họ Và Tên "  value="${checkUser.hoTen}"/>
 							</div>
 							<div class="form-group col-md-10">
 								<label>Địa Chỉ</label>
 								<form:input class="input" type="text" path="diaChi" id="diaChi"
-									placeholder="Địa Chỉ" />
+									placeholder="Địa Chỉ"  value="${checkUser.diaChi}"/>
 							</div>
 							<div class="form-group col-md-10">
 								<label>Số điện thoại</label>
 								<form:input class="input" type="number" path="sDT" id="sdt"
-									placeholder="Số điện thoại" />
+									placeholder="Số điện thoại" value="${checkUser.sDT}" />
 							</div>
 							<div class="form-group col-md-10">
 								<label>Email</label>
 								<form:input class="input" type="email" path="email" id="email"
-									placeholder="Email" />
+									placeholder="Email" value="${checkUser.email}" />
 							</div>
 							<div class="form-group col-md-10">
 								<form:input type="file" path="anhuser" id="file-2"
@@ -77,12 +83,6 @@
 				<!-- /Order Details -->
 			</div>
 			<!-- /container -->
-	<c:if test="${thongbao != null }">
-		<script type="text/javascript">									
-			alert("Thông tin của bạn đã được thay đổi");																
-		</script>	
-	</c:if>
-
 		<script type="text/javascript">
 			function myFunction() {
 			var tenDN= document.getElementById("tenDN").value;
@@ -95,11 +95,11 @@
 			var email= document.getElementById("email").value;
 			 submitOK = "true";			 
 			if(nhapLaiMK=="" || matKhau=="" || hoTen=="" || diaChi=="" || sdt=="" || email==""){
-				 alert("Vui lòng điền đủ thông tin");
+				 alert("Vui lòng điền đủ thông tin. Vui lòng điền đủ thông tin");
 				    submitOK = "false";
 			}
-			if(nhapLaiMK!=matKhau){
-				alert("Vui lòng điền đủ thông tin");
+			if(nhapLaiMK != matKhau){
+				alert("Mật khẩu chưa trùng nhau.Vui lòng nhập lại");
 			    submitOK = "false";
 			}
 			if(image==""){

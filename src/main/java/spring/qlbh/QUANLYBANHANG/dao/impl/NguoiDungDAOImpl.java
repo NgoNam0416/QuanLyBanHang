@@ -77,4 +77,18 @@ public class NguoiDungDAOImpl implements NguoiDungDAO {
 		
 		return (NguoiDungInfo) query.uniqueResult();
 	}
+	public void updateNguoiDung(NguoiDungInfo nd) {
+		Session session = sessionFactory.getCurrentSession();
+		NguoiDung nguoiDungEntity = new NguoiDung();
+		nguoiDungEntity.setMaND(nd.getMaND());
+		nguoiDungEntity.setTenDN(nd.getTenDN());
+		nguoiDungEntity.setMatKhau(nd.getMatKhau());
+		nguoiDungEntity.setHoTen(nd.getHoTen());
+		nguoiDungEntity.setImage(nd.getImage());
+		nguoiDungEntity.setDiaChi(nd.getDiaChi());
+		nguoiDungEntity.setsDT(nd.getsDT());
+		nguoiDungEntity.setEmail(nd.getEmail());
+		nguoiDungEntity.setLoai(nd.getLoai());
+		session.update(nguoiDungEntity);
+	}
 }

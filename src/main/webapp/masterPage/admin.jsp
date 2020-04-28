@@ -113,13 +113,13 @@
 									Quản Lý Loại Hàng <i class="fas fa-angle-left right"></i>
 								</p>
 						</a></li>
-						<li class="nav-item has-treeview"><a href="${pageContext.request.contextPath}/admin/user"
+						<li class="nav-item has-treeview"><a href="${pageContext.request.contextPath}/admin/loaihang/shown"
 							class="nav-link"> <i class="nav-icon fas fa-users"></i>
 								<p>
 									Quản Lý Người Dùng <i class="fas fa-angle-left right"></i>
 								</p>
 						</a></li>
-						<li class="nav-item has-treeview"><a href="${pageContext.request.contextPath}/admin/user"
+						<li class="nav-item has-treeview"><a href="${pageContext.request.contextPath}/admin/nguoidung/shownND"
 							class="nav-link"> <i class="nav-icon far fa-clipboard"></i>
 								<p>
 									Quản Lý Maketing <i class="fas fa-angle-left right"></i>

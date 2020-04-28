@@ -16,4 +16,6 @@ public interface NguoiDungDAO {
 	public NguoiDungInfo checkLogin(String userName,String passWord);
 	public void insertNguoiDung(NguoiDungInfo userInfo);
 	public NguoiDungInfo checkTrungTenDN(String tenDN);
+	public void updateNguoiDung(NguoiDungInfo nd);
+	
 }
