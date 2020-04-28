@@ -29,7 +29,8 @@
 					<th>Tên Hàng</th>
 					<th>Ảnh Hàng</th>
 					<th>Số Lượng</th>
-					<th>Đơn Giá</th>					
+					<th>Đơn Giá</th>
+					<th>Giảm giá (%)</th>					
 				</tr>
 			</thead>		
 			<tbody>
@@ -42,6 +43,7 @@
 							alt=""></td>
 					<td>${dsdh.soLuong}</td>
 					<td>${dsdh.donGia}</td>
+					<td>${dsdh.phanTram}</td>
 				</tr>
 				
 			</c:forEach>

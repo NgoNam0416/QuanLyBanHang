@@ -8,14 +8,15 @@ public class DanhSachHang {
 	private int donGia;
 	private String imageLink;
 	private int soLuong;
-	
-	public DanhSachHang(int maHang, String tenHang, int donGia, String imageLink, int soLuong) {
+	private int phanTram;
+	public DanhSachHang(int maHang, String tenHang, int donGia, String imageLink, int soLuong, int phanTram) {
 		super();
 		this.maHang = maHang;
 		this.tenHang = tenHang;
 		this.donGia = donGia;
 		this.imageLink = imageLink;
 		this.soLuong = soLuong;
+		this.phanTram = phanTram;
 	}
 	public DanhSachHang() {
 		super();
@@ -51,5 +52,13 @@ public class DanhSachHang {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
+	public int getPhanTram() {
+		return phanTram;
+	}
+	public void setPhanTram(int phanTram) {
+		this.phanTram = phanTram;
+	}
+	
+	
 	
 }

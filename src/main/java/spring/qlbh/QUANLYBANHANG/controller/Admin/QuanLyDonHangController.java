@@ -57,29 +57,25 @@ public class QuanLyDonHangController {
 	@RequestMapping(value = "/xulydonhang/chapthuan")
 	public String xulychapthuan(Model model,HttpServletRequest request) {
 		int maDH=Integer.parseInt(request.getParameter("maDH"));
-		DonHangInfo donhang= donHangDAO.loadDonHangTheoID(maDH);
-		donHangDAO.updateTrangThaiDH(donhang, 1);
+		donHangDAO.updateTrangThaiDH(maDH, 1);
 		return "redirect:/admin/donhang/xulydonhang";
 	}
 	@RequestMapping(value = "/xulydonhang/huy")
 	public String xuLyHuy(Model model,HttpServletRequest request) {
 		int maDH=Integer.parseInt(request.getParameter("maDH"));
-		DonHangInfo donhang= donHangDAO.loadDonHangTheoID(maDH);
-		donHangDAO.updateTrangThaiDH(donhang, 3);
+		donHangDAO.updateTrangThaiDH(maDH, 3);
 		return "redirect:/admin/donhang/xulydonhang";
 	}
 	@RequestMapping(value = "/chothanhtoan/thanhtoan")
 	public String xuLyThanhToan(Model model,HttpServletRequest request) {
 		int maDH=Integer.parseInt(request.getParameter("maDH"));
-		DonHangInfo donhang= donHangDAO.loadDonHangTheoID(maDH);
-		donHangDAO.updateTrangThaiDH(donhang, 2);
+		donHangDAO.updateTrangThaiDH(maDH, 2);
 		return "redirect:/admin/donhang/chothanhtoan";
 	}
 	@RequestMapping(value = "/chothanhtoan/trave")
 	public String xuLyTraHang(Model model,HttpServletRequest request) {
 		int maDH=Integer.parseInt(request.getParameter("maDH"));
-		DonHangInfo donhang= donHangDAO.loadDonHangTheoID(maDH);
-		donHangDAO.updateTrangThaiDH(donhang, 3);
+		donHangDAO.updateTrangThaiDH(maDH, 3);
 		return "redirect:/admin/donhang/chothanhtoan";
 	}
 }
