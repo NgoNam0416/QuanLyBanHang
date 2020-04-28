@@ -19,4 +19,12 @@ public interface LoaiHangDAO {
 	LoaiHang findLoaiHang(int maLoai);
 	public void themLoaiHang(LoaiHangInfo loaihang);
 
+
+
+	public List<LoaiHangInfo> loadLoaiID(int maLoai);
+
+
+
+	public void suaLoai(LoaiHangInfo suaLoai);
+
 }
